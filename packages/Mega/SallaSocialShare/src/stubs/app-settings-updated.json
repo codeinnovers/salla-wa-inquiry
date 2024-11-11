@@ -1,0 +1,25 @@
+{
+    "event": "app.settings.updated",
+    "merchant": 353677589,
+    "created_at": "2024-09-25 14:10:47",
+    "data": {
+        "id": 806937489,
+        "app_name": "Social Media Share",
+        "app_description": "Custom and drag social share blocks to landing, collection, product and other pages within 3 minutes",
+        "app_type": "public",
+        "settings": {
+            "facebook_configuration": [
+                {
+                    "facebook_configuration.facebook_configuration_enable": true,
+                    "facebook_configuration.facebook_configuration_url": "https:\/\/www.facebook.com\/"
+                }
+            ],
+            "instagram_configuration": [
+                {
+                    "instagram_configuration.enable": true,
+                    "instagram_configuration.url": "https:\/\/www.instagram.com\/"
+                }
+            ]
+        }
+    }
+}

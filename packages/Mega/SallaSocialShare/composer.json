@@ -1,0 +1,25 @@
+{
+    "name": "mega/salla-social-share",
+    "description": "Salla Integration with Social share app",
+    "authors": [
+        {
+            "name": "Team CodeInnovers",
+            "email": "saad@codeinnovers.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+
+    "autoload": {
+        "psr-4": {
+            "Mega\\SallaSocialShare\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mega\\SallaSocialShare\\Providers\\SallaSocialShareServiceProvider"
+            ]
+        }
+    }
+}

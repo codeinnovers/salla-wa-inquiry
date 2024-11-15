@@ -22,18 +22,46 @@ new #[Layout('layouts.guest')] class extends Component
 
         $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
     }
+
+    public function sendMagicLink()
+    {
+        $this->form->email = 'saif@mail.com';
+        if(!$this->form->email)
+        {
+            Session::flash('error', __('Email address is required.'));
+            return;
+        }
+        $user = \App\Models\User::whereEmail($this->form->email)->latest()->first();
+        if(!$user) {
+            Session::flash('status', __('A login link has been sent if user exists with this email. Contact us if you dont get email'));
+            return;
+        }
+        $magicLink = \Maize\MagicLogin\Facades\MagicLink::send(
+            authenticatable: $user,
+            redirectUrl: route('dashboard')
+        );
+        info($magicLink);
+        Session::flash('status', __('A login link has been sent if user exists with this email. Contact us if you dont get email'));
+    }
+
+
 }; ?>
 
 <div>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
-
+    @if(session('error'))
+        <div class="font-medium text-sm text-red-600">
+            {{ session('error') }}
+        </div>
+    @endif
     <form wire:submit="login">
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input wire:model="form.email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
+            <a href="#" wire:click="sendMagicLink()" class=" mt-1 right hover:text-blue-500">{{ __('Send me login link') }}</a>
         </div>
 
         <!-- Password -->

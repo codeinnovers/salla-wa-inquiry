@@ -30,6 +30,7 @@ class InquiryController extends Controller
             $whatsappNumber = $configValues['mega-whatsapp-inuiry.whatsapp_number'];
             $messageTemplate = $configValues['mega-whatsapp-inuiry.message'];
             $message  =$this->getInquiryMessage($request,$messageTemplate);
+            $message = urlencode($message);
             $inquiryData[] = [
                 'enable' => $enable,
                 'admin_whatsapp_number' => $whatsappNumber,
@@ -42,6 +43,32 @@ class InquiryController extends Controller
         }catch (\Exception $e){
             $this->logger->info($e->getMessage());
         }
+    }
+    
+    public function getConfigValue(Request $request){
+        $storeId = $request->query('store_id');
+        $configData = [];
+        try{
+             $merchant = Merchant::with('socialConfigurations')->where('merchant_identifier',$storeId)->latest()->first();
+             $configurations = $merchant->socialConfigurations;
+             $configValues = $this->getConfigurationValues($configurations);
+             $enable = $configValues['mega-whatsapp-inuiry.enable'];
+             $configData[] = [
+                'enable' => $enable
+            ];
+            return response()->json([
+                'status' => 'success',
+                'data' => $configData
+            ]);
+            
+        }catch (\Exception $e){
+            $this->logger->info($e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Store not found',
+            ], 404);
+        }
+        
     }
 
     public function getConfigurationValues($configurations) {

@@ -45,7 +45,9 @@ class WebhooksController extends Controller
                 $expirationDate = \Carbon\Carbon::now()->addDays(13);
                 $data['token_exp'] = $expirationDate;
                 $merchant = Merchant::updateOrCreate(['merchant_identifier' => $params['merchant']],$data);
-//                $job = new \Mega\SallaStorePickup\Jobs\Merchants\UpdateMerchantProfileJob($merchant);
+                $merchantProfileService = app(\Mega\SallaSocialShare\Services\Merchant\MerchantProfile::class);
+                $merchantProfileService->completeMerchantProfile($merchant);
+//              $job = new \Mega\SallaStorePickup\Jobs\Merchants\UpdateMerchantProfileJob($merchant);
 //                dispatch($job);
                 $resp = [
                     'status' => true,

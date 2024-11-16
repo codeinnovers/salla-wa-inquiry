@@ -128,9 +128,14 @@ return [
         ],
         'salla_social_share' => [
             'driver' => 'daily',
-            'path' => storage_path('logs/socialshare/social-share.log'),
+            'path' => storage_path('logs/whats-inq/w-inq.log'),
             'level' => 'info',
         ],
+        'salla_social_share_merchant' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/whats-inq/merchant.log'),
+            'level' => 'info',
+        ]
 
     ],
 

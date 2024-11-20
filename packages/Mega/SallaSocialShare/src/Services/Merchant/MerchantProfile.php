@@ -1,5 +1,6 @@
 <?php
 namespace Mega\SallaSocialShare\Services\Merchant;
+use App\Mail\WelcomeMailable;
 use Illuminate\Support\Facades\Log;
 use App\Models\Merchant;
 
@@ -28,7 +29,13 @@ class MerchantProfile
                     $data['email'] = $email;
                     $data['store_link'] = $storeLink;
                     $merchant = Merchant::updateOrCreate(['merchant_identifier' => $merchant['merchant_identifier']],$data);
-//                    app(\Mega\MarketPlace\Services\Webhook\App\AppInstalledWebhookService::class)->notifyAppInstalled($merchantData);
+                    $merchantInfo = [
+                        'name' => $data['name'],
+                        'email' => $data['email'],
+                        'app_name' => "WhatsApp Product Inquiry",
+                        'teamName' => "Team Coding Home"
+                    ];
+                    \Mail::to($merchant['email'])->send(new WelcomeMailable($merchantInfo));
                 } catch (ValidatorException $e) {
 
                 } catch(\Exception $e) {

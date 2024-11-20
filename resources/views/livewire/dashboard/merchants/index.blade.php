@@ -16,11 +16,11 @@
             placeholder="Search {{ __('crud.merchants.collectionTitle') }}..."
         />
 
-{{--        @can('create', App\Models\Merchant::class)--}}
-{{--        <a wire:navigate href="{{ route('dashboard.merchants.create') }}">--}}
-{{--            <x-ui.button>New</x-ui.button>--}}
-{{--        </a>--}}
-{{--        @endcan--}}
+        @can('create', App\Models\Merchant::class)
+        <a wire:navigate href="{{ route('dashboard.merchants.create') }}">
+            <x-ui.button>New</x-ui.button>
+        </a>
+        @endcan
     </div>
 
     {{-- Delete Modal --}}
@@ -75,14 +75,16 @@
                     >{{ __('crud.merchants.inputs.store_reference.label')
                     }}</x-ui.table.header
                 >
-                <x-ui.table.header for-crud wire:click="sortBy('access_token')"
-                    >{{ __('crud.merchants.inputs.access_token.label')
-                    }}</x-ui.table.header
-                >
-                <x-ui.table.header for-crud wire:click="sortBy('refresh_token')"
-                    >{{ __('crud.merchants.inputs.refresh_token.label')
-                    }}</x-ui.table.header
-                >
+
+{{--                <x-ui.table.header for-crud wire:click="sortBy('access_token')"--}}
+{{--                    >{{ __('crud.merchants.inputs.access_token.label')--}}
+{{--                    }}</x-ui.table.header--}}
+{{--                >--}}
+{{--                <x-ui.table.header for-crud wire:click="sortBy('refresh_token')"--}}
+{{--                    >{{ __('crud.merchants.inputs.refresh_token.label')--}}
+{{--                    }}</x-ui.table.header--}}
+{{--                >--}}
+
                 <x-ui.table.header for-crud wire:click="sortBy('token_exp')"
                     >{{ __('crud.merchants.inputs.token_exp.label')
                     }}</x-ui.table.header
@@ -108,22 +110,22 @@
                     <x-ui.table.column for-crud
                         >{{ $merchant->store_reference }}</x-ui.table.column
                     >
-                    <x-ui.table.column for-crud
-                        >{{ $merchant->access_token }}</x-ui.table.column
-                    >
-                    <x-ui.table.column for-crud
-                        >{{ $merchant->refresh_token }}</x-ui.table.column
-                    >
+{{--                    <x-ui.table.column for-crud--}}
+{{--                        >{{ $merchant->access_token }}</x-ui.table.column--}}
+{{--                    >--}}
+{{--                    <x-ui.table.column for-crud--}}
+{{--                        >{{ $merchant->refresh_token }}</x-ui.table.column--}}
+{{--                    >--}}
                     <x-ui.table.column for-crud
                         >{{ $merchant->token_exp }}</x-ui.table.column
                     >
                     <x-ui.table.action-column>
                         @can('update', $merchant)
-{{--                        <x-ui.action--}}
-{{--                            wire:navigate--}}
-{{--                            href="{{ route('dashboard.merchants.edit', $merchant) }}"--}}
-{{--                            >Edit</x-ui.action--}}
-{{--                        >--}}
+                        <x-ui.action
+                            wire:navigate
+                            href="{{ route('dashboard.merchants.edit', $merchant) }}"
+                            >Edit</x-ui.action
+                        >
                         @endcan @can('delete', $merchant)
                         <x-ui.action.danger
                             wire:click="confirmDeletion({{ $merchant->id }})"

@@ -65,10 +65,10 @@
                     >{{ __('crud.webhooks.inputs.status.label')
                     }}</x-ui.table.header
                 >
-                <x-ui.table.header for-crud wire:click="sortBy('payload')"
-                    >{{ __('crud.webhooks.inputs.payload.label')
-                    }}</x-ui.table.header
-                >
+{{--                <x-ui.table.header for-crud wire:click="sortBy('payload')"--}}
+{{--                    >{{ __('crud.webhooks.inputs.payload.label')--}}
+{{--                    }}</x-ui.table.header--}}
+{{--                >--}}
                 <x-ui.table.header for-crud wire:click="sortBy('merchant')"
                     >{{ __('crud.webhooks.inputs.merchant.label')
                     }}</x-ui.table.header
@@ -88,9 +88,9 @@
                     <x-ui.table.column for-crud
                         >{{ $webhook->status }}</x-ui.table.column
                     >
-                    <x-ui.table.column for-crud
-                        >{{ $webhook->payload }}</x-ui.table.column
-                    >
+{{--                    <x-ui.table.column for-crud--}}
+{{--                        >{{ $webhook->payload }}</x-ui.table.column--}}
+{{--                    >--}}
                     <x-ui.table.column for-crud
                         >{{ $webhook->merchant }}</x-ui.table.column
                     >

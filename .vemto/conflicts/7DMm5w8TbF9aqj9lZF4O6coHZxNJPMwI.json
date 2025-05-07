@@ -1,0 +1,9 @@
+{
+    "conflicts": [
+        {
+            "id": "30a600cd-58c9-4e03-b586-9c6c121e4711",
+            "currentContent": "<?php\n\nnamespace Database\\Seeders;\n\nuse App\\Models\\User;\nuse Illuminate\\Database\\Seeder;\n\nclass UserSeeder extends Seeder\n{\n    /**\n     * Run the database seeds.\n     */\n    public function run(): void\n    {\n        // User::factory()\n        //     ->count(5)\n        //     ->create();\n        \n        $user = User::create([\n            'name'     => 'Admin',\n            'email'    => 'admin@example.com',\n            'password' => bcrypt('admin123'),\n        ]);\n \n        // $user->roles()->attach(1);\n    }\n}\n",
+            "newContent": "<?php\n\nnamespace Database\\Seeders;\n\nuse App\\Models\\User;\nuse Illuminate\\Database\\Seeder;\n\nclass UserSeeder extends Seeder\n{\n    /**\n     * Run the database seeds.\n     */\n    public function run(): void\n    {\n        User::factory()\n            ->count(5)\n            ->create();\n    }\n}\n"
+        }
+    ]
+}

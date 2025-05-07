@@ -1,5 +1,7 @@
 <?php
 
+
+
 use App\Livewire\Actions\Logout;
 use Livewire\Volt\Component;
 
@@ -117,6 +119,36 @@ new class extends Component
                                 >
                                     {{ __('navigation.social_configurations') }}
                                 </x-dropdown-link>
+                                @endcan @can('view-any',
+                                App\Models\StoreAndProductWebhook::class)
+                                <x-dropdown-link
+                                    wire:navigate
+                                    href="{{ route('dashboard.store-and-product-webhooks.index') }}"
+                                >
+                                    {{
+                                    __('navigation.store_and_product_webhooks')
+                                    }}
+                                </x-dropdown-link>
+                                @endcan @can('view-any',
+                                App\Models\StoreProductReviewsMerchant::class)
+                                <x-dropdown-link
+                                    wire:navigate
+                                    href="{{ route('dashboard.store-product-reviews-merchants.index') }}"
+                                >
+                                    {{
+                                    __('navigation.store_product_reviews_merchants')
+                                    }}
+                                </x-dropdown-link>
+                                @endcan @can('view-any',
+                                App\Models\StoreProductReviewsConfiguration::class)
+                                <x-dropdown-link
+                                    wire:navigate
+                                    href="{{ route('dashboard.store-product-reviews-configurations.index') }}"
+                                >
+                                    {{
+                                    __('navigation.store_product_reviews_configurations')
+                                    }}
+                                </x-dropdown-link>
                                 @endcan
                             </x-slot>
                         </x-dropdown>
@@ -225,6 +257,29 @@ new class extends Component
                 :active="request()->routeIs('dashboard.social-configurations.index')"
             >
                 {{ __('navigation.social_configurations') }}
+            </x-responsive-nav-link>
+            @endcan @can('view-any', App\Models\StoreAndProductWebhook::class)
+            <x-responsive-nav-link
+                href="{{ route('dashboard.store-and-product-webhooks.index') }}"
+                :active="request()->routeIs('dashboard.store-and-product-webhooks.index')"
+            >
+                {{ __('navigation.store_and_product_webhooks') }}
+            </x-responsive-nav-link>
+            @endcan @can('view-any',
+            App\Models\StoreProductReviewsMerchant::class)
+            <x-responsive-nav-link
+                href="{{ route('dashboard.store-product-reviews-merchants.index') }}"
+                :active="request()->routeIs('dashboard.store-product-reviews-merchants.index')"
+            >
+                {{ __('navigation.store_product_reviews_merchants') }}
+            </x-responsive-nav-link>
+            @endcan @can('view-any',
+            App\Models\StoreProductReviewsConfiguration::class)
+            <x-responsive-nav-link
+                href="{{ route('dashboard.store-product-reviews-configurations.index') }}"
+                :active="request()->routeIs('dashboard.store-product-reviews-configurations.index')"
+            >
+                {{ __('navigation.store_product_reviews_configurations') }}
             </x-responsive-nav-link>
             @endcan
         </div>

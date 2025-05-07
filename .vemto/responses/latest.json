@@ -1,0 +1,3779 @@
+{
+    "mode": "migration",
+    "tables": {
+        "users": {
+            "columns": {
+                "id": {
+                    "type": "bigInteger",
+                    "name": "id",
+                    "autoIncrement": true,
+                    "unsigned": true,
+                    "table": "users",
+                    "creatorMethod": "id",
+                    "order": 0,
+                    "creationOrder": 1,
+                    "options": []
+                },
+                "name": {
+                    "type": "string",
+                    "name": "name",
+                    "length": 255,
+                    "table": "users",
+                    "creatorMethod": "string",
+                    "order": 1,
+                    "creationOrder": 2,
+                    "options": []
+                },
+                "email": {
+                    "type": "string",
+                    "name": "email",
+                    "length": 255,
+                    "table": "users",
+                    "creatorMethod": "string",
+                    "unique": true,
+                    "order": 2,
+                    "creationOrder": 3,
+                    "options": []
+                },
+                "email_verified_at": {
+                    "type": "timestamp",
+                    "name": "email_verified_at",
+                    "precision": 0,
+                    "table": "users",
+                    "creatorMethod": "timestamp",
+                    "nullable": true,
+                    "order": 3,
+                    "creationOrder": 4,
+                    "options": []
+                },
+                "password": {
+                    "type": "string",
+                    "name": "password",
+                    "length": 255,
+                    "table": "users",
+                    "creatorMethod": "string",
+                    "order": 4,
+                    "creationOrder": 5,
+                    "options": []
+                },
+                "remember_token": {
+                    "type": "string",
+                    "name": "remember_token",
+                    "length": 100,
+                    "table": "users",
+                    "creatorMethod": "rememberToken",
+                    "nullable": true,
+                    "order": 5,
+                    "creationOrder": 6,
+                    "options": []
+                },
+                "created_at": {
+                    "type": "timestamp",
+                    "name": "created_at",
+                    "precision": 0,
+                    "table": "users",
+                    "creatorMethod": "timestamps",
+                    "nullable": true,
+                    "order": 6,
+                    "creationOrder": 7,
+                    "options": []
+                },
+                "updated_at": {
+                    "type": "timestamp",
+                    "name": "updated_at",
+                    "precision": 0,
+                    "table": "users",
+                    "creatorMethod": "timestamps",
+                    "nullable": true,
+                    "order": 7,
+                    "creationOrder": 8,
+                    "options": []
+                }
+            },
+            "indexes": [],
+            "uniques": [],
+            "foreigns": [],
+            "migrations": [
+                {
+                    "migration": "\/var\/www\/html\/projects\/salla-wa-inquiry\/database\/migrations\/0001_01_01_000000_create_users_table.php",
+                    "relativePath": "\/database\/migrations\/0001_01_01_000000_create_users_table.php",
+                    "migrationName": "0001_01_01_000000_create_users_table",
+                    "datePrefix": "0001_01_01",
+                    "fullPrefix": "0001_01_01_000000",
+                    "addedColumns": [
+                        {
+                            "type": "bigInteger",
+                            "name": "id",
+                            "autoIncrement": true,
+                            "unsigned": true,
+                            "table": "users",
+                            "creatorMethod": "id"
+                        },
+                        {
+                            "type": "string",
+                            "name": "name",
+                            "length": 255,
+                            "table": "users",
+                            "creatorMethod": "string"
+                        },
+                        {
+                            "type": "string",
+                            "name": "email",
+                            "length": 255,
+                            "table": "users",
+                            "creatorMethod": "string",
+                            "unique": true
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "email_verified_at",
+                            "precision": 0,
+                            "table": "users",
+                            "creatorMethod": "timestamp",
+                            "nullable": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "password",
+                            "length": 255,
+                            "table": "users",
+                            "creatorMethod": "string"
+                        },
+                        {
+                            "type": "string",
+                            "name": "remember_token",
+                            "length": 100,
+                            "table": "users",
+                            "creatorMethod": "rememberToken",
+                            "nullable": true
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "created_at",
+                            "precision": 0,
+                            "table": "users",
+                            "creatorMethod": "timestamps",
+                            "nullable": true
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "updated_at",
+                            "precision": 0,
+                            "table": "users",
+                            "creatorMethod": "timestamps",
+                            "nullable": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "email",
+                            "length": 255,
+                            "table": "password_reset_tokens",
+                            "creatorMethod": "string",
+                            "primary": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "token",
+                            "length": 255,
+                            "table": "password_reset_tokens",
+                            "creatorMethod": "string"
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "created_at",
+                            "precision": 0,
+                            "table": "password_reset_tokens",
+                            "creatorMethod": "timestamp",
+                            "nullable": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "id",
+                            "length": 255,
+                            "table": "sessions",
+                            "creatorMethod": "string",
+                            "primary": true
+                        },
+                        {
+                            "type": "bigInteger",
+                            "name": "user_id",
+                            "autoIncrement": false,
+                            "unsigned": true,
+                            "table": "sessions",
+                            "creatorMethod": "foreignId",
+                            "nullable": true,
+                            "index": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "ip_address",
+                            "length": 45,
+                            "table": "sessions",
+                            "creatorMethod": "string",
+                            "nullable": true
+                        },
+                        {
+                            "type": "text",
+                            "name": "user_agent",
+                            "table": "sessions",
+                            "creatorMethod": "text",
+                            "nullable": true
+                        },
+                        {
+                            "type": "longText",
+                            "name": "payload",
+                            "table": "sessions",
+                            "creatorMethod": "longText"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "last_activity",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "sessions",
+                            "creatorMethod": "integer",
+                            "index": true
+                        }
+                    ],
+                    "changedColumns": [],
+                    "droppedColumns": [],
+                    "renamedColumns": [],
+                    "commands": [
+                        {
+                            "name": "create",
+                            "table": "users"
+                        },
+                        {
+                            "name": "create",
+                            "table": "password_reset_tokens"
+                        },
+                        {
+                            "name": "create",
+                            "table": "sessions"
+                        }
+                    ],
+                    "createdTables": [
+                        "users",
+                        "password_reset_tokens",
+                        "sessions"
+                    ],
+                    "renamedTables": [],
+                    "droppedTables": []
+                }
+            ],
+            "oldNames": [],
+            "name": "users"
+        },
+        "password_reset_tokens": {
+            "columns": {
+                "email": {
+                    "type": "string",
+                    "name": "email",
+                    "length": 255,
+                    "table": "password_reset_tokens",
+                    "creatorMethod": "string",
+                    "primary": true,
+                    "order": 0,
+                    "creationOrder": 1,
+                    "options": []
+                },
+                "token": {
+                    "type": "string",
+                    "name": "token",
+                    "length": 255,
+                    "table": "password_reset_tokens",
+                    "creatorMethod": "string",
+                    "order": 1,
+                    "creationOrder": 2,
+                    "options": []
+                },
+                "created_at": {
+                    "type": "timestamp",
+                    "name": "created_at",
+                    "precision": 0,
+                    "table": "password_reset_tokens",
+                    "creatorMethod": "timestamp",
+                    "nullable": true,
+                    "order": 2,
+                    "creationOrder": 3,
+                    "options": []
+                }
+            },
+            "indexes": [],
+            "uniques": [],
+            "foreigns": [],
+            "migrations": [
+                {
+                    "migration": "\/var\/www\/html\/projects\/salla-wa-inquiry\/database\/migrations\/0001_01_01_000000_create_users_table.php",
+                    "relativePath": "\/database\/migrations\/0001_01_01_000000_create_users_table.php",
+                    "migrationName": "0001_01_01_000000_create_users_table",
+                    "datePrefix": "0001_01_01",
+                    "fullPrefix": "0001_01_01_000000",
+                    "addedColumns": [
+                        {
+                            "type": "bigInteger",
+                            "name": "id",
+                            "autoIncrement": true,
+                            "unsigned": true,
+                            "table": "users",
+                            "creatorMethod": "id"
+                        },
+                        {
+                            "type": "string",
+                            "name": "name",
+                            "length": 255,
+                            "table": "users",
+                            "creatorMethod": "string"
+                        },
+                        {
+                            "type": "string",
+                            "name": "email",
+                            "length": 255,
+                            "table": "users",
+                            "creatorMethod": "string",
+                            "unique": true
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "email_verified_at",
+                            "precision": 0,
+                            "table": "users",
+                            "creatorMethod": "timestamp",
+                            "nullable": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "password",
+                            "length": 255,
+                            "table": "users",
+                            "creatorMethod": "string"
+                        },
+                        {
+                            "type": "string",
+                            "name": "remember_token",
+                            "length": 100,
+                            "table": "users",
+                            "creatorMethod": "rememberToken",
+                            "nullable": true
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "created_at",
+                            "precision": 0,
+                            "table": "users",
+                            "creatorMethod": "timestamps",
+                            "nullable": true
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "updated_at",
+                            "precision": 0,
+                            "table": "users",
+                            "creatorMethod": "timestamps",
+                            "nullable": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "email",
+                            "length": 255,
+                            "table": "password_reset_tokens",
+                            "creatorMethod": "string",
+                            "primary": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "token",
+                            "length": 255,
+                            "table": "password_reset_tokens",
+                            "creatorMethod": "string"
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "created_at",
+                            "precision": 0,
+                            "table": "password_reset_tokens",
+                            "creatorMethod": "timestamp",
+                            "nullable": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "id",
+                            "length": 255,
+                            "table": "sessions",
+                            "creatorMethod": "string",
+                            "primary": true
+                        },
+                        {
+                            "type": "bigInteger",
+                            "name": "user_id",
+                            "autoIncrement": false,
+                            "unsigned": true,
+                            "table": "sessions",
+                            "creatorMethod": "foreignId",
+                            "nullable": true,
+                            "index": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "ip_address",
+                            "length": 45,
+                            "table": "sessions",
+                            "creatorMethod": "string",
+                            "nullable": true
+                        },
+                        {
+                            "type": "text",
+                            "name": "user_agent",
+                            "table": "sessions",
+                            "creatorMethod": "text",
+                            "nullable": true
+                        },
+                        {
+                            "type": "longText",
+                            "name": "payload",
+                            "table": "sessions",
+                            "creatorMethod": "longText"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "last_activity",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "sessions",
+                            "creatorMethod": "integer",
+                            "index": true
+                        }
+                    ],
+                    "changedColumns": [],
+                    "droppedColumns": [],
+                    "renamedColumns": [],
+                    "commands": [
+                        {
+                            "name": "create",
+                            "table": "users"
+                        },
+                        {
+                            "name": "create",
+                            "table": "password_reset_tokens"
+                        },
+                        {
+                            "name": "create",
+                            "table": "sessions"
+                        }
+                    ],
+                    "createdTables": [
+                        "users",
+                        "password_reset_tokens",
+                        "sessions"
+                    ],
+                    "renamedTables": [],
+                    "droppedTables": []
+                }
+            ],
+            "oldNames": [],
+            "name": "password_reset_tokens"
+        },
+        "sessions": {
+            "columns": {
+                "id": {
+                    "type": "string",
+                    "name": "id",
+                    "length": 255,
+                    "table": "sessions",
+                    "creatorMethod": "string",
+                    "primary": true,
+                    "order": 0,
+                    "creationOrder": 1,
+                    "options": []
+                },
+                "user_id": {
+                    "type": "bigInteger",
+                    "name": "user_id",
+                    "autoIncrement": false,
+                    "unsigned": true,
+                    "table": "sessions",
+                    "creatorMethod": "foreignId",
+                    "nullable": true,
+                    "index": true,
+                    "order": 1,
+                    "creationOrder": 2,
+                    "options": []
+                },
+                "ip_address": {
+                    "type": "string",
+                    "name": "ip_address",
+                    "length": 45,
+                    "table": "sessions",
+                    "creatorMethod": "string",
+                    "nullable": true,
+                    "order": 2,
+                    "creationOrder": 3,
+                    "options": []
+                },
+                "user_agent": {
+                    "type": "text",
+                    "name": "user_agent",
+                    "table": "sessions",
+                    "creatorMethod": "text",
+                    "nullable": true,
+                    "order": 3,
+                    "creationOrder": 4,
+                    "options": []
+                },
+                "payload": {
+                    "type": "longText",
+                    "name": "payload",
+                    "table": "sessions",
+                    "creatorMethod": "longText",
+                    "order": 4,
+                    "creationOrder": 5,
+                    "options": []
+                },
+                "last_activity": {
+                    "type": "integer",
+                    "name": "last_activity",
+                    "autoIncrement": false,
+                    "unsigned": false,
+                    "table": "sessions",
+                    "creatorMethod": "integer",
+                    "index": true,
+                    "order": 5,
+                    "creationOrder": 6,
+                    "options": []
+                }
+            },
+            "indexes": [],
+            "uniques": [],
+            "foreigns": [],
+            "migrations": [
+                {
+                    "migration": "\/var\/www\/html\/projects\/salla-wa-inquiry\/database\/migrations\/0001_01_01_000000_create_users_table.php",
+                    "relativePath": "\/database\/migrations\/0001_01_01_000000_create_users_table.php",
+                    "migrationName": "0001_01_01_000000_create_users_table",
+                    "datePrefix": "0001_01_01",
+                    "fullPrefix": "0001_01_01_000000",
+                    "addedColumns": [
+                        {
+                            "type": "bigInteger",
+                            "name": "id",
+                            "autoIncrement": true,
+                            "unsigned": true,
+                            "table": "users",
+                            "creatorMethod": "id"
+                        },
+                        {
+                            "type": "string",
+                            "name": "name",
+                            "length": 255,
+                            "table": "users",
+                            "creatorMethod": "string"
+                        },
+                        {
+                            "type": "string",
+                            "name": "email",
+                            "length": 255,
+                            "table": "users",
+                            "creatorMethod": "string",
+                            "unique": true
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "email_verified_at",
+                            "precision": 0,
+                            "table": "users",
+                            "creatorMethod": "timestamp",
+                            "nullable": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "password",
+                            "length": 255,
+                            "table": "users",
+                            "creatorMethod": "string"
+                        },
+                        {
+                            "type": "string",
+                            "name": "remember_token",
+                            "length": 100,
+                            "table": "users",
+                            "creatorMethod": "rememberToken",
+                            "nullable": true
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "created_at",
+                            "precision": 0,
+                            "table": "users",
+                            "creatorMethod": "timestamps",
+                            "nullable": true
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "updated_at",
+                            "precision": 0,
+                            "table": "users",
+                            "creatorMethod": "timestamps",
+                            "nullable": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "email",
+                            "length": 255,
+                            "table": "password_reset_tokens",
+                            "creatorMethod": "string",
+                            "primary": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "token",
+                            "length": 255,
+                            "table": "password_reset_tokens",
+                            "creatorMethod": "string"
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "created_at",
+                            "precision": 0,
+                            "table": "password_reset_tokens",
+                            "creatorMethod": "timestamp",
+                            "nullable": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "id",
+                            "length": 255,
+                            "table": "sessions",
+                            "creatorMethod": "string",
+                            "primary": true
+                        },
+                        {
+                            "type": "bigInteger",
+                            "name": "user_id",
+                            "autoIncrement": false,
+                            "unsigned": true,
+                            "table": "sessions",
+                            "creatorMethod": "foreignId",
+                            "nullable": true,
+                            "index": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "ip_address",
+                            "length": 45,
+                            "table": "sessions",
+                            "creatorMethod": "string",
+                            "nullable": true
+                        },
+                        {
+                            "type": "text",
+                            "name": "user_agent",
+                            "table": "sessions",
+                            "creatorMethod": "text",
+                            "nullable": true
+                        },
+                        {
+                            "type": "longText",
+                            "name": "payload",
+                            "table": "sessions",
+                            "creatorMethod": "longText"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "last_activity",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "sessions",
+                            "creatorMethod": "integer",
+                            "index": true
+                        }
+                    ],
+                    "changedColumns": [],
+                    "droppedColumns": [],
+                    "renamedColumns": [],
+                    "commands": [
+                        {
+                            "name": "create",
+                            "table": "users"
+                        },
+                        {
+                            "name": "create",
+                            "table": "password_reset_tokens"
+                        },
+                        {
+                            "name": "create",
+                            "table": "sessions"
+                        }
+                    ],
+                    "createdTables": [
+                        "users",
+                        "password_reset_tokens",
+                        "sessions"
+                    ],
+                    "renamedTables": [],
+                    "droppedTables": []
+                }
+            ],
+            "oldNames": [],
+            "name": "sessions"
+        },
+        "cache": {
+            "columns": {
+                "key": {
+                    "type": "string",
+                    "name": "key",
+                    "length": 255,
+                    "table": "cache",
+                    "creatorMethod": "string",
+                    "primary": true,
+                    "order": 0,
+                    "creationOrder": 1,
+                    "options": []
+                },
+                "value": {
+                    "type": "mediumText",
+                    "name": "value",
+                    "table": "cache",
+                    "creatorMethod": "mediumText",
+                    "order": 1,
+                    "creationOrder": 2,
+                    "options": []
+                },
+                "expiration": {
+                    "type": "integer",
+                    "name": "expiration",
+                    "autoIncrement": false,
+                    "unsigned": false,
+                    "table": "cache",
+                    "creatorMethod": "integer",
+                    "order": 2,
+                    "creationOrder": 3,
+                    "options": []
+                }
+            },
+            "indexes": [],
+            "uniques": [],
+            "foreigns": [],
+            "migrations": [
+                {
+                    "migration": "\/var\/www\/html\/projects\/salla-wa-inquiry\/database\/migrations\/0001_01_01_000001_create_cache_table.php",
+                    "relativePath": "\/database\/migrations\/0001_01_01_000001_create_cache_table.php",
+                    "migrationName": "0001_01_01_000001_create_cache_table",
+                    "datePrefix": "0001_01_01",
+                    "fullPrefix": "0001_01_01_000001",
+                    "addedColumns": [
+                        {
+                            "type": "string",
+                            "name": "key",
+                            "length": 255,
+                            "table": "cache",
+                            "creatorMethod": "string",
+                            "primary": true
+                        },
+                        {
+                            "type": "mediumText",
+                            "name": "value",
+                            "table": "cache",
+                            "creatorMethod": "mediumText"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "expiration",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "cache",
+                            "creatorMethod": "integer"
+                        },
+                        {
+                            "type": "string",
+                            "name": "key",
+                            "length": 255,
+                            "table": "cache_locks",
+                            "creatorMethod": "string",
+                            "primary": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "owner",
+                            "length": 255,
+                            "table": "cache_locks",
+                            "creatorMethod": "string"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "expiration",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "cache_locks",
+                            "creatorMethod": "integer"
+                        }
+                    ],
+                    "changedColumns": [],
+                    "droppedColumns": [],
+                    "renamedColumns": [],
+                    "commands": [
+                        {
+                            "name": "create",
+                            "table": "cache"
+                        },
+                        {
+                            "name": "create",
+                            "table": "cache_locks"
+                        }
+                    ],
+                    "createdTables": [
+                        "cache",
+                        "cache_locks"
+                    ],
+                    "renamedTables": [],
+                    "droppedTables": []
+                }
+            ],
+            "oldNames": [],
+            "name": "cache"
+        },
+        "cache_locks": {
+            "columns": {
+                "key": {
+                    "type": "string",
+                    "name": "key",
+                    "length": 255,
+                    "table": "cache_locks",
+                    "creatorMethod": "string",
+                    "primary": true,
+                    "order": 0,
+                    "creationOrder": 1,
+                    "options": []
+                },
+                "owner": {
+                    "type": "string",
+                    "name": "owner",
+                    "length": 255,
+                    "table": "cache_locks",
+                    "creatorMethod": "string",
+                    "order": 1,
+                    "creationOrder": 2,
+                    "options": []
+                },
+                "expiration": {
+                    "type": "integer",
+                    "name": "expiration",
+                    "autoIncrement": false,
+                    "unsigned": false,
+                    "table": "cache_locks",
+                    "creatorMethod": "integer",
+                    "order": 2,
+                    "creationOrder": 3,
+                    "options": []
+                }
+            },
+            "indexes": [],
+            "uniques": [],
+            "foreigns": [],
+            "migrations": [
+                {
+                    "migration": "\/var\/www\/html\/projects\/salla-wa-inquiry\/database\/migrations\/0001_01_01_000001_create_cache_table.php",
+                    "relativePath": "\/database\/migrations\/0001_01_01_000001_create_cache_table.php",
+                    "migrationName": "0001_01_01_000001_create_cache_table",
+                    "datePrefix": "0001_01_01",
+                    "fullPrefix": "0001_01_01_000001",
+                    "addedColumns": [
+                        {
+                            "type": "string",
+                            "name": "key",
+                            "length": 255,
+                            "table": "cache",
+                            "creatorMethod": "string",
+                            "primary": true
+                        },
+                        {
+                            "type": "mediumText",
+                            "name": "value",
+                            "table": "cache",
+                            "creatorMethod": "mediumText"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "expiration",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "cache",
+                            "creatorMethod": "integer"
+                        },
+                        {
+                            "type": "string",
+                            "name": "key",
+                            "length": 255,
+                            "table": "cache_locks",
+                            "creatorMethod": "string",
+                            "primary": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "owner",
+                            "length": 255,
+                            "table": "cache_locks",
+                            "creatorMethod": "string"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "expiration",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "cache_locks",
+                            "creatorMethod": "integer"
+                        }
+                    ],
+                    "changedColumns": [],
+                    "droppedColumns": [],
+                    "renamedColumns": [],
+                    "commands": [
+                        {
+                            "name": "create",
+                            "table": "cache"
+                        },
+                        {
+                            "name": "create",
+                            "table": "cache_locks"
+                        }
+                    ],
+                    "createdTables": [
+                        "cache",
+                        "cache_locks"
+                    ],
+                    "renamedTables": [],
+                    "droppedTables": []
+                }
+            ],
+            "oldNames": [],
+            "name": "cache_locks"
+        },
+        "jobs": {
+            "columns": {
+                "id": {
+                    "type": "bigInteger",
+                    "name": "id",
+                    "autoIncrement": true,
+                    "unsigned": true,
+                    "table": "jobs",
+                    "creatorMethod": "id",
+                    "order": 0,
+                    "creationOrder": 1,
+                    "options": []
+                },
+                "queue": {
+                    "type": "string",
+                    "name": "queue",
+                    "length": 255,
+                    "table": "jobs",
+                    "creatorMethod": "string",
+                    "index": true,
+                    "order": 1,
+                    "creationOrder": 2,
+                    "options": []
+                },
+                "payload": {
+                    "type": "longText",
+                    "name": "payload",
+                    "table": "jobs",
+                    "creatorMethod": "longText",
+                    "order": 2,
+                    "creationOrder": 3,
+                    "options": []
+                },
+                "attempts": {
+                    "type": "tinyInteger",
+                    "name": "attempts",
+                    "autoIncrement": false,
+                    "unsigned": true,
+                    "table": "jobs",
+                    "creatorMethod": "unsignedTinyInteger",
+                    "order": 3,
+                    "creationOrder": 4,
+                    "options": []
+                },
+                "reserved_at": {
+                    "type": "integer",
+                    "name": "reserved_at",
+                    "autoIncrement": false,
+                    "unsigned": true,
+                    "table": "jobs",
+                    "creatorMethod": "unsignedInteger",
+                    "nullable": true,
+                    "order": 4,
+                    "creationOrder": 5,
+                    "options": []
+                },
+                "available_at": {
+                    "type": "integer",
+                    "name": "available_at",
+                    "autoIncrement": false,
+                    "unsigned": true,
+                    "table": "jobs",
+                    "creatorMethod": "unsignedInteger",
+                    "order": 5,
+                    "creationOrder": 6,
+                    "options": []
+                },
+                "created_at": {
+                    "type": "integer",
+                    "name": "created_at",
+                    "autoIncrement": false,
+                    "unsigned": true,
+                    "table": "jobs",
+                    "creatorMethod": "unsignedInteger",
+                    "order": 6,
+                    "creationOrder": 7,
+                    "options": []
+                }
+            },
+            "indexes": [],
+            "uniques": [],
+            "foreigns": [],
+            "migrations": [
+                {
+                    "migration": "\/var\/www\/html\/projects\/salla-wa-inquiry\/database\/migrations\/0001_01_01_000002_create_jobs_table.php",
+                    "relativePath": "\/database\/migrations\/0001_01_01_000002_create_jobs_table.php",
+                    "migrationName": "0001_01_01_000002_create_jobs_table",
+                    "datePrefix": "0001_01_01",
+                    "fullPrefix": "0001_01_01_000002",
+                    "addedColumns": [
+                        {
+                            "type": "bigInteger",
+                            "name": "id",
+                            "autoIncrement": true,
+                            "unsigned": true,
+                            "table": "jobs",
+                            "creatorMethod": "id"
+                        },
+                        {
+                            "type": "string",
+                            "name": "queue",
+                            "length": 255,
+                            "table": "jobs",
+                            "creatorMethod": "string",
+                            "index": true
+                        },
+                        {
+                            "type": "longText",
+                            "name": "payload",
+                            "table": "jobs",
+                            "creatorMethod": "longText"
+                        },
+                        {
+                            "type": "tinyInteger",
+                            "name": "attempts",
+                            "autoIncrement": false,
+                            "unsigned": true,
+                            "table": "jobs",
+                            "creatorMethod": "unsignedTinyInteger"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "reserved_at",
+                            "autoIncrement": false,
+                            "unsigned": true,
+                            "table": "jobs",
+                            "creatorMethod": "unsignedInteger",
+                            "nullable": true
+                        },
+                        {
+                            "type": "integer",
+                            "name": "available_at",
+                            "autoIncrement": false,
+                            "unsigned": true,
+                            "table": "jobs",
+                            "creatorMethod": "unsignedInteger"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "created_at",
+                            "autoIncrement": false,
+                            "unsigned": true,
+                            "table": "jobs",
+                            "creatorMethod": "unsignedInteger"
+                        },
+                        {
+                            "type": "string",
+                            "name": "id",
+                            "length": 255,
+                            "table": "job_batches",
+                            "creatorMethod": "string",
+                            "primary": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "name",
+                            "length": 255,
+                            "table": "job_batches",
+                            "creatorMethod": "string"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "total_jobs",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "job_batches",
+                            "creatorMethod": "integer"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "pending_jobs",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "job_batches",
+                            "creatorMethod": "integer"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "failed_jobs",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "job_batches",
+                            "creatorMethod": "integer"
+                        },
+                        {
+                            "type": "longText",
+                            "name": "failed_job_ids",
+                            "table": "job_batches",
+                            "creatorMethod": "longText"
+                        },
+                        {
+                            "type": "mediumText",
+                            "name": "options",
+                            "table": "job_batches",
+                            "creatorMethod": "mediumText",
+                            "nullable": true
+                        },
+                        {
+                            "type": "integer",
+                            "name": "cancelled_at",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "job_batches",
+                            "creatorMethod": "integer",
+                            "nullable": true
+                        },
+                        {
+                            "type": "integer",
+                            "name": "created_at",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "job_batches",
+                            "creatorMethod": "integer"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "finished_at",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "job_batches",
+                            "creatorMethod": "integer",
+                            "nullable": true
+                        },
+                        {
+                            "type": "bigInteger",
+                            "name": "id",
+                            "autoIncrement": true,
+                            "unsigned": true,
+                            "table": "failed_jobs",
+                            "creatorMethod": "id"
+                        },
+                        {
+                            "type": "string",
+                            "name": "uuid",
+                            "length": 255,
+                            "table": "failed_jobs",
+                            "creatorMethod": "string",
+                            "unique": true
+                        },
+                        {
+                            "type": "text",
+                            "name": "connection",
+                            "table": "failed_jobs",
+                            "creatorMethod": "text"
+                        },
+                        {
+                            "type": "text",
+                            "name": "queue",
+                            "table": "failed_jobs",
+                            "creatorMethod": "text"
+                        },
+                        {
+                            "type": "longText",
+                            "name": "payload",
+                            "table": "failed_jobs",
+                            "creatorMethod": "longText"
+                        },
+                        {
+                            "type": "longText",
+                            "name": "exception",
+                            "table": "failed_jobs",
+                            "creatorMethod": "longText"
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "failed_at",
+                            "precision": 0,
+                            "table": "failed_jobs",
+                            "creatorMethod": "timestamp",
+                            "useCurrent": true
+                        }
+                    ],
+                    "changedColumns": [],
+                    "droppedColumns": [],
+                    "renamedColumns": [],
+                    "commands": [
+                        {
+                            "name": "create",
+                            "table": "jobs"
+                        },
+                        {
+                            "name": "create",
+                            "table": "job_batches"
+                        },
+                        {
+                            "name": "create",
+                            "table": "failed_jobs"
+                        }
+                    ],
+                    "createdTables": [
+                        "jobs",
+                        "job_batches",
+                        "failed_jobs"
+                    ],
+                    "renamedTables": [],
+                    "droppedTables": []
+                }
+            ],
+            "oldNames": [],
+            "name": "jobs"
+        },
+        "job_batches": {
+            "columns": {
+                "id": {
+                    "type": "string",
+                    "name": "id",
+                    "length": 255,
+                    "table": "job_batches",
+                    "creatorMethod": "string",
+                    "primary": true,
+                    "order": 0,
+                    "creationOrder": 1,
+                    "options": []
+                },
+                "name": {
+                    "type": "string",
+                    "name": "name",
+                    "length": 255,
+                    "table": "job_batches",
+                    "creatorMethod": "string",
+                    "order": 1,
+                    "creationOrder": 2,
+                    "options": []
+                },
+                "total_jobs": {
+                    "type": "integer",
+                    "name": "total_jobs",
+                    "autoIncrement": false,
+                    "unsigned": false,
+                    "table": "job_batches",
+                    "creatorMethod": "integer",
+                    "order": 2,
+                    "creationOrder": 3,
+                    "options": []
+                },
+                "pending_jobs": {
+                    "type": "integer",
+                    "name": "pending_jobs",
+                    "autoIncrement": false,
+                    "unsigned": false,
+                    "table": "job_batches",
+                    "creatorMethod": "integer",
+                    "order": 3,
+                    "creationOrder": 4,
+                    "options": []
+                },
+                "failed_jobs": {
+                    "type": "integer",
+                    "name": "failed_jobs",
+                    "autoIncrement": false,
+                    "unsigned": false,
+                    "table": "job_batches",
+                    "creatorMethod": "integer",
+                    "order": 4,
+                    "creationOrder": 5,
+                    "options": []
+                },
+                "failed_job_ids": {
+                    "type": "longText",
+                    "name": "failed_job_ids",
+                    "table": "job_batches",
+                    "creatorMethod": "longText",
+                    "order": 5,
+                    "creationOrder": 6,
+                    "options": []
+                },
+                "options": {
+                    "type": "mediumText",
+                    "name": "options",
+                    "table": "job_batches",
+                    "creatorMethod": "mediumText",
+                    "nullable": true,
+                    "order": 6,
+                    "creationOrder": 7,
+                    "options": []
+                },
+                "cancelled_at": {
+                    "type": "integer",
+                    "name": "cancelled_at",
+                    "autoIncrement": false,
+                    "unsigned": false,
+                    "table": "job_batches",
+                    "creatorMethod": "integer",
+                    "nullable": true,
+                    "order": 7,
+                    "creationOrder": 8,
+                    "options": []
+                },
+                "created_at": {
+                    "type": "integer",
+                    "name": "created_at",
+                    "autoIncrement": false,
+                    "unsigned": false,
+                    "table": "job_batches",
+                    "creatorMethod": "integer",
+                    "order": 8,
+                    "creationOrder": 9,
+                    "options": []
+                },
+                "finished_at": {
+                    "type": "integer",
+                    "name": "finished_at",
+                    "autoIncrement": false,
+                    "unsigned": false,
+                    "table": "job_batches",
+                    "creatorMethod": "integer",
+                    "nullable": true,
+                    "order": 9,
+                    "creationOrder": 10,
+                    "options": []
+                }
+            },
+            "indexes": [],
+            "uniques": [],
+            "foreigns": [],
+            "migrations": [
+                {
+                    "migration": "\/var\/www\/html\/projects\/salla-wa-inquiry\/database\/migrations\/0001_01_01_000002_create_jobs_table.php",
+                    "relativePath": "\/database\/migrations\/0001_01_01_000002_create_jobs_table.php",
+                    "migrationName": "0001_01_01_000002_create_jobs_table",
+                    "datePrefix": "0001_01_01",
+                    "fullPrefix": "0001_01_01_000002",
+                    "addedColumns": [
+                        {
+                            "type": "bigInteger",
+                            "name": "id",
+                            "autoIncrement": true,
+                            "unsigned": true,
+                            "table": "jobs",
+                            "creatorMethod": "id"
+                        },
+                        {
+                            "type": "string",
+                            "name": "queue",
+                            "length": 255,
+                            "table": "jobs",
+                            "creatorMethod": "string",
+                            "index": true
+                        },
+                        {
+                            "type": "longText",
+                            "name": "payload",
+                            "table": "jobs",
+                            "creatorMethod": "longText"
+                        },
+                        {
+                            "type": "tinyInteger",
+                            "name": "attempts",
+                            "autoIncrement": false,
+                            "unsigned": true,
+                            "table": "jobs",
+                            "creatorMethod": "unsignedTinyInteger"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "reserved_at",
+                            "autoIncrement": false,
+                            "unsigned": true,
+                            "table": "jobs",
+                            "creatorMethod": "unsignedInteger",
+                            "nullable": true
+                        },
+                        {
+                            "type": "integer",
+                            "name": "available_at",
+                            "autoIncrement": false,
+                            "unsigned": true,
+                            "table": "jobs",
+                            "creatorMethod": "unsignedInteger"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "created_at",
+                            "autoIncrement": false,
+                            "unsigned": true,
+                            "table": "jobs",
+                            "creatorMethod": "unsignedInteger"
+                        },
+                        {
+                            "type": "string",
+                            "name": "id",
+                            "length": 255,
+                            "table": "job_batches",
+                            "creatorMethod": "string",
+                            "primary": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "name",
+                            "length": 255,
+                            "table": "job_batches",
+                            "creatorMethod": "string"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "total_jobs",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "job_batches",
+                            "creatorMethod": "integer"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "pending_jobs",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "job_batches",
+                            "creatorMethod": "integer"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "failed_jobs",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "job_batches",
+                            "creatorMethod": "integer"
+                        },
+                        {
+                            "type": "longText",
+                            "name": "failed_job_ids",
+                            "table": "job_batches",
+                            "creatorMethod": "longText"
+                        },
+                        {
+                            "type": "mediumText",
+                            "name": "options",
+                            "table": "job_batches",
+                            "creatorMethod": "mediumText",
+                            "nullable": true
+                        },
+                        {
+                            "type": "integer",
+                            "name": "cancelled_at",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "job_batches",
+                            "creatorMethod": "integer",
+                            "nullable": true
+                        },
+                        {
+                            "type": "integer",
+                            "name": "created_at",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "job_batches",
+                            "creatorMethod": "integer"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "finished_at",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "job_batches",
+                            "creatorMethod": "integer",
+                            "nullable": true
+                        },
+                        {
+                            "type": "bigInteger",
+                            "name": "id",
+                            "autoIncrement": true,
+                            "unsigned": true,
+                            "table": "failed_jobs",
+                            "creatorMethod": "id"
+                        },
+                        {
+                            "type": "string",
+                            "name": "uuid",
+                            "length": 255,
+                            "table": "failed_jobs",
+                            "creatorMethod": "string",
+                            "unique": true
+                        },
+                        {
+                            "type": "text",
+                            "name": "connection",
+                            "table": "failed_jobs",
+                            "creatorMethod": "text"
+                        },
+                        {
+                            "type": "text",
+                            "name": "queue",
+                            "table": "failed_jobs",
+                            "creatorMethod": "text"
+                        },
+                        {
+                            "type": "longText",
+                            "name": "payload",
+                            "table": "failed_jobs",
+                            "creatorMethod": "longText"
+                        },
+                        {
+                            "type": "longText",
+                            "name": "exception",
+                            "table": "failed_jobs",
+                            "creatorMethod": "longText"
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "failed_at",
+                            "precision": 0,
+                            "table": "failed_jobs",
+                            "creatorMethod": "timestamp",
+                            "useCurrent": true
+                        }
+                    ],
+                    "changedColumns": [],
+                    "droppedColumns": [],
+                    "renamedColumns": [],
+                    "commands": [
+                        {
+                            "name": "create",
+                            "table": "jobs"
+                        },
+                        {
+                            "name": "create",
+                            "table": "job_batches"
+                        },
+                        {
+                            "name": "create",
+                            "table": "failed_jobs"
+                        }
+                    ],
+                    "createdTables": [
+                        "jobs",
+                        "job_batches",
+                        "failed_jobs"
+                    ],
+                    "renamedTables": [],
+                    "droppedTables": []
+                }
+            ],
+            "oldNames": [],
+            "name": "job_batches"
+        },
+        "failed_jobs": {
+            "columns": {
+                "id": {
+                    "type": "bigInteger",
+                    "name": "id",
+                    "autoIncrement": true,
+                    "unsigned": true,
+                    "table": "failed_jobs",
+                    "creatorMethod": "id",
+                    "order": 0,
+                    "creationOrder": 1,
+                    "options": []
+                },
+                "uuid": {
+                    "type": "string",
+                    "name": "uuid",
+                    "length": 255,
+                    "table": "failed_jobs",
+                    "creatorMethod": "string",
+                    "unique": true,
+                    "order": 1,
+                    "creationOrder": 2,
+                    "options": []
+                },
+                "connection": {
+                    "type": "text",
+                    "name": "connection",
+                    "table": "failed_jobs",
+                    "creatorMethod": "text",
+                    "order": 2,
+                    "creationOrder": 3,
+                    "options": []
+                },
+                "queue": {
+                    "type": "text",
+                    "name": "queue",
+                    "table": "failed_jobs",
+                    "creatorMethod": "text",
+                    "order": 3,
+                    "creationOrder": 4,
+                    "options": []
+                },
+                "payload": {
+                    "type": "longText",
+                    "name": "payload",
+                    "table": "failed_jobs",
+                    "creatorMethod": "longText",
+                    "order": 4,
+                    "creationOrder": 5,
+                    "options": []
+                },
+                "exception": {
+                    "type": "longText",
+                    "name": "exception",
+                    "table": "failed_jobs",
+                    "creatorMethod": "longText",
+                    "order": 5,
+                    "creationOrder": 6,
+                    "options": []
+                },
+                "failed_at": {
+                    "type": "timestamp",
+                    "name": "failed_at",
+                    "precision": 0,
+                    "table": "failed_jobs",
+                    "creatorMethod": "timestamp",
+                    "useCurrent": true,
+                    "order": 6,
+                    "creationOrder": 7,
+                    "options": []
+                }
+            },
+            "indexes": [],
+            "uniques": [],
+            "foreigns": [],
+            "migrations": [
+                {
+                    "migration": "\/var\/www\/html\/projects\/salla-wa-inquiry\/database\/migrations\/0001_01_01_000002_create_jobs_table.php",
+                    "relativePath": "\/database\/migrations\/0001_01_01_000002_create_jobs_table.php",
+                    "migrationName": "0001_01_01_000002_create_jobs_table",
+                    "datePrefix": "0001_01_01",
+                    "fullPrefix": "0001_01_01_000002",
+                    "addedColumns": [
+                        {
+                            "type": "bigInteger",
+                            "name": "id",
+                            "autoIncrement": true,
+                            "unsigned": true,
+                            "table": "jobs",
+                            "creatorMethod": "id"
+                        },
+                        {
+                            "type": "string",
+                            "name": "queue",
+                            "length": 255,
+                            "table": "jobs",
+                            "creatorMethod": "string",
+                            "index": true
+                        },
+                        {
+                            "type": "longText",
+                            "name": "payload",
+                            "table": "jobs",
+                            "creatorMethod": "longText"
+                        },
+                        {
+                            "type": "tinyInteger",
+                            "name": "attempts",
+                            "autoIncrement": false,
+                            "unsigned": true,
+                            "table": "jobs",
+                            "creatorMethod": "unsignedTinyInteger"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "reserved_at",
+                            "autoIncrement": false,
+                            "unsigned": true,
+                            "table": "jobs",
+                            "creatorMethod": "unsignedInteger",
+                            "nullable": true
+                        },
+                        {
+                            "type": "integer",
+                            "name": "available_at",
+                            "autoIncrement": false,
+                            "unsigned": true,
+                            "table": "jobs",
+                            "creatorMethod": "unsignedInteger"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "created_at",
+                            "autoIncrement": false,
+                            "unsigned": true,
+                            "table": "jobs",
+                            "creatorMethod": "unsignedInteger"
+                        },
+                        {
+                            "type": "string",
+                            "name": "id",
+                            "length": 255,
+                            "table": "job_batches",
+                            "creatorMethod": "string",
+                            "primary": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "name",
+                            "length": 255,
+                            "table": "job_batches",
+                            "creatorMethod": "string"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "total_jobs",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "job_batches",
+                            "creatorMethod": "integer"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "pending_jobs",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "job_batches",
+                            "creatorMethod": "integer"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "failed_jobs",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "job_batches",
+                            "creatorMethod": "integer"
+                        },
+                        {
+                            "type": "longText",
+                            "name": "failed_job_ids",
+                            "table": "job_batches",
+                            "creatorMethod": "longText"
+                        },
+                        {
+                            "type": "mediumText",
+                            "name": "options",
+                            "table": "job_batches",
+                            "creatorMethod": "mediumText",
+                            "nullable": true
+                        },
+                        {
+                            "type": "integer",
+                            "name": "cancelled_at",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "job_batches",
+                            "creatorMethod": "integer",
+                            "nullable": true
+                        },
+                        {
+                            "type": "integer",
+                            "name": "created_at",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "job_batches",
+                            "creatorMethod": "integer"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "finished_at",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "job_batches",
+                            "creatorMethod": "integer",
+                            "nullable": true
+                        },
+                        {
+                            "type": "bigInteger",
+                            "name": "id",
+                            "autoIncrement": true,
+                            "unsigned": true,
+                            "table": "failed_jobs",
+                            "creatorMethod": "id"
+                        },
+                        {
+                            "type": "string",
+                            "name": "uuid",
+                            "length": 255,
+                            "table": "failed_jobs",
+                            "creatorMethod": "string",
+                            "unique": true
+                        },
+                        {
+                            "type": "text",
+                            "name": "connection",
+                            "table": "failed_jobs",
+                            "creatorMethod": "text"
+                        },
+                        {
+                            "type": "text",
+                            "name": "queue",
+                            "table": "failed_jobs",
+                            "creatorMethod": "text"
+                        },
+                        {
+                            "type": "longText",
+                            "name": "payload",
+                            "table": "failed_jobs",
+                            "creatorMethod": "longText"
+                        },
+                        {
+                            "type": "longText",
+                            "name": "exception",
+                            "table": "failed_jobs",
+                            "creatorMethod": "longText"
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "failed_at",
+                            "precision": 0,
+                            "table": "failed_jobs",
+                            "creatorMethod": "timestamp",
+                            "useCurrent": true
+                        }
+                    ],
+                    "changedColumns": [],
+                    "droppedColumns": [],
+                    "renamedColumns": [],
+                    "commands": [
+                        {
+                            "name": "create",
+                            "table": "jobs"
+                        },
+                        {
+                            "name": "create",
+                            "table": "job_batches"
+                        },
+                        {
+                            "name": "create",
+                            "table": "failed_jobs"
+                        }
+                    ],
+                    "createdTables": [
+                        "jobs",
+                        "job_batches",
+                        "failed_jobs"
+                    ],
+                    "renamedTables": [],
+                    "droppedTables": []
+                }
+            ],
+            "oldNames": [],
+            "name": "failed_jobs"
+        },
+        "webhooks": {
+            "columns": {
+                "id": {
+                    "type": "bigInteger",
+                    "name": "id",
+                    "autoIncrement": true,
+                    "unsigned": true,
+                    "table": "webhooks",
+                    "creatorMethod": "id",
+                    "order": 0,
+                    "creationOrder": 1,
+                    "options": []
+                },
+                "event": {
+                    "type": "string",
+                    "name": "event",
+                    "length": 255,
+                    "table": "webhooks",
+                    "creatorMethod": "string",
+                    "order": 1,
+                    "creationOrder": 2,
+                    "options": []
+                },
+                "reference_number": {
+                    "type": "string",
+                    "name": "reference_number",
+                    "length": 255,
+                    "table": "webhooks",
+                    "creatorMethod": "string",
+                    "nullable": true,
+                    "order": 2,
+                    "creationOrder": 3,
+                    "options": []
+                },
+                "status": {
+                    "type": "string",
+                    "name": "status",
+                    "length": 255,
+                    "table": "webhooks",
+                    "creatorMethod": "string",
+                    "nullable": true,
+                    "order": 3,
+                    "creationOrder": 4,
+                    "options": []
+                },
+                "merchant": {
+                    "type": "string",
+                    "name": "merchant",
+                    "length": 255,
+                    "table": "webhooks",
+                    "creatorMethod": "string",
+                    "nullable": true,
+                    "order": 4,
+                    "creationOrder": 5,
+                    "options": []
+                },
+                "payload": {
+                    "type": "longText",
+                    "name": "payload",
+                    "table": "webhooks",
+                    "creatorMethod": "longText",
+                    "nullable": true,
+                    "order": 5,
+                    "creationOrder": 6,
+                    "options": []
+                },
+                "created_at": {
+                    "type": "timestamp",
+                    "name": "created_at",
+                    "precision": 0,
+                    "table": "webhooks",
+                    "creatorMethod": "timestamp",
+                    "nullable": true,
+                    "order": 6,
+                    "creationOrder": 7,
+                    "options": []
+                },
+                "updated_at": {
+                    "type": "timestamp",
+                    "name": "updated_at",
+                    "precision": 0,
+                    "table": "webhooks",
+                    "creatorMethod": "timestamp",
+                    "nullable": true,
+                    "order": 7,
+                    "creationOrder": 8,
+                    "options": []
+                }
+            },
+            "indexes": [],
+            "uniques": [],
+            "foreigns": [],
+            "migrations": [
+                {
+                    "migration": "\/var\/www\/html\/projects\/salla-wa-inquiry\/database\/migrations\/2024_09_26_123820_001_create_webhooks_table.php",
+                    "relativePath": "\/database\/migrations\/2024_09_26_123820_001_create_webhooks_table.php",
+                    "migrationName": "2024_09_26_123820_001_create_webhooks_table",
+                    "datePrefix": "2024_09_26",
+                    "fullPrefix": "2024_09_26_123820",
+                    "addedColumns": [
+                        {
+                            "type": "bigInteger",
+                            "name": "id",
+                            "autoIncrement": true,
+                            "unsigned": true,
+                            "table": "webhooks",
+                            "creatorMethod": "id"
+                        },
+                        {
+                            "type": "string",
+                            "name": "event",
+                            "length": 255,
+                            "table": "webhooks",
+                            "creatorMethod": "string"
+                        },
+                        {
+                            "type": "string",
+                            "name": "reference_number",
+                            "length": 255,
+                            "table": "webhooks",
+                            "creatorMethod": "string",
+                            "nullable": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "status",
+                            "length": 255,
+                            "table": "webhooks",
+                            "creatorMethod": "string",
+                            "nullable": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "merchant",
+                            "length": 255,
+                            "table": "webhooks",
+                            "creatorMethod": "string",
+                            "nullable": true
+                        },
+                        {
+                            "type": "longText",
+                            "name": "payload",
+                            "table": "webhooks",
+                            "creatorMethod": "longText",
+                            "nullable": true
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "created_at",
+                            "precision": 0,
+                            "table": "webhooks",
+                            "creatorMethod": "timestamp",
+                            "nullable": true
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "updated_at",
+                            "precision": 0,
+                            "table": "webhooks",
+                            "creatorMethod": "timestamp",
+                            "nullable": true
+                        }
+                    ],
+                    "changedColumns": [],
+                    "droppedColumns": [],
+                    "renamedColumns": [],
+                    "commands": [
+                        {
+                            "name": "create",
+                            "table": "webhooks"
+                        }
+                    ],
+                    "createdTables": [
+                        "webhooks"
+                    ],
+                    "renamedTables": [],
+                    "droppedTables": []
+                }
+            ],
+            "oldNames": [],
+            "name": "webhooks"
+        },
+        "merchants": {
+            "columns": {
+                "id": {
+                    "type": "bigInteger",
+                    "name": "id",
+                    "autoIncrement": true,
+                    "unsigned": true,
+                    "table": "merchants",
+                    "creatorMethod": "id",
+                    "order": 0,
+                    "creationOrder": 1,
+                    "options": []
+                },
+                "merchant_identifier": {
+                    "type": "string",
+                    "name": "merchant_identifier",
+                    "length": 255,
+                    "table": "merchants",
+                    "creatorMethod": "string",
+                    "nullable": true,
+                    "order": 1,
+                    "creationOrder": 2,
+                    "options": []
+                },
+                "name": {
+                    "type": "string",
+                    "name": "name",
+                    "length": 255,
+                    "table": "merchants",
+                    "creatorMethod": "string",
+                    "nullable": true,
+                    "order": 2,
+                    "creationOrder": 3,
+                    "options": []
+                },
+                "email": {
+                    "type": "string",
+                    "name": "email",
+                    "length": 255,
+                    "table": "merchants",
+                    "creatorMethod": "string",
+                    "nullable": true,
+                    "order": 3,
+                    "creationOrder": 4,
+                    "options": []
+                },
+                "store_link": {
+                    "type": "string",
+                    "name": "store_link",
+                    "length": 255,
+                    "table": "merchants",
+                    "creatorMethod": "string",
+                    "nullable": true,
+                    "order": 4,
+                    "creationOrder": 5,
+                    "options": []
+                },
+                "store_reference": {
+                    "type": "string",
+                    "name": "store_reference",
+                    "length": 255,
+                    "table": "merchants",
+                    "creatorMethod": "string",
+                    "nullable": true,
+                    "order": 5,
+                    "creationOrder": 6,
+                    "options": []
+                },
+                "access_token": {
+                    "type": "longText",
+                    "name": "access_token",
+                    "table": "merchants",
+                    "creatorMethod": "longText",
+                    "nullable": true,
+                    "order": 6,
+                    "creationOrder": 7,
+                    "options": []
+                },
+                "refresh_token": {
+                    "type": "longText",
+                    "name": "refresh_token",
+                    "table": "merchants",
+                    "creatorMethod": "longText",
+                    "nullable": true,
+                    "order": 7,
+                    "creationOrder": 8,
+                    "options": []
+                },
+                "token_exp": {
+                    "type": "date",
+                    "name": "token_exp",
+                    "table": "merchants",
+                    "creatorMethod": "date",
+                    "nullable": true,
+                    "order": 8,
+                    "creationOrder": 9,
+                    "options": []
+                },
+                "created_at": {
+                    "type": "timestamp",
+                    "name": "created_at",
+                    "precision": 0,
+                    "table": "merchants",
+                    "creatorMethod": "timestamp",
+                    "nullable": true,
+                    "order": 9,
+                    "creationOrder": 10,
+                    "options": []
+                },
+                "updated_at": {
+                    "type": "timestamp",
+                    "name": "updated_at",
+                    "precision": 0,
+                    "table": "merchants",
+                    "creatorMethod": "timestamp",
+                    "nullable": true,
+                    "order": 10,
+                    "creationOrder": 11,
+                    "options": []
+                }
+            },
+            "indexes": [],
+            "uniques": [],
+            "foreigns": [],
+            "migrations": [
+                {
+                    "migration": "\/var\/www\/html\/projects\/salla-wa-inquiry\/database\/migrations\/2024_09_26_135658_001_create_merchants_table.php",
+                    "relativePath": "\/database\/migrations\/2024_09_26_135658_001_create_merchants_table.php",
+                    "migrationName": "2024_09_26_135658_001_create_merchants_table",
+                    "datePrefix": "2024_09_26",
+                    "fullPrefix": "2024_09_26_135658",
+                    "addedColumns": [
+                        {
+                            "type": "bigInteger",
+                            "name": "id",
+                            "autoIncrement": true,
+                            "unsigned": true,
+                            "table": "merchants",
+                            "creatorMethod": "id"
+                        },
+                        {
+                            "type": "string",
+                            "name": "merchant_identifier",
+                            "length": 255,
+                            "table": "merchants",
+                            "creatorMethod": "string",
+                            "nullable": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "name",
+                            "length": 255,
+                            "table": "merchants",
+                            "creatorMethod": "string",
+                            "nullable": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "email",
+                            "length": 255,
+                            "table": "merchants",
+                            "creatorMethod": "string",
+                            "nullable": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "store_link",
+                            "length": 255,
+                            "table": "merchants",
+                            "creatorMethod": "string",
+                            "nullable": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "store_reference",
+                            "length": 255,
+                            "table": "merchants",
+                            "creatorMethod": "string",
+                            "nullable": true
+                        },
+                        {
+                            "type": "longText",
+                            "name": "access_token",
+                            "table": "merchants",
+                            "creatorMethod": "longText",
+                            "nullable": true
+                        },
+                        {
+                            "type": "longText",
+                            "name": "refresh_token",
+                            "table": "merchants",
+                            "creatorMethod": "longText",
+                            "nullable": true
+                        },
+                        {
+                            "type": "date",
+                            "name": "token_exp",
+                            "table": "merchants",
+                            "creatorMethod": "date",
+                            "nullable": true
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "created_at",
+                            "precision": 0,
+                            "table": "merchants",
+                            "creatorMethod": "timestamp",
+                            "nullable": true
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "updated_at",
+                            "precision": 0,
+                            "table": "merchants",
+                            "creatorMethod": "timestamp",
+                            "nullable": true
+                        }
+                    ],
+                    "changedColumns": [],
+                    "droppedColumns": [],
+                    "renamedColumns": [],
+                    "commands": [
+                        {
+                            "name": "create",
+                            "table": "merchants"
+                        }
+                    ],
+                    "createdTables": [
+                        "merchants"
+                    ],
+                    "renamedTables": [],
+                    "droppedTables": []
+                }
+            ],
+            "oldNames": [],
+            "name": "merchants"
+        },
+        "social_configurations": {
+            "columns": {
+                "id": {
+                    "type": "bigInteger",
+                    "name": "id",
+                    "autoIncrement": true,
+                    "unsigned": true,
+                    "table": "social_configuration",
+                    "creatorMethod": "id",
+                    "order": 0,
+                    "creationOrder": 1,
+                    "options": []
+                },
+                "config_name": {
+                    "type": "text",
+                    "name": "config_name",
+                    "table": "social_configuration",
+                    "creatorMethod": "text",
+                    "nullable": true,
+                    "order": 2,
+                    "creationOrder": 3,
+                    "options": []
+                },
+                "config_value": {
+                    "type": "text",
+                    "name": "config_value",
+                    "table": "social_configuration",
+                    "creatorMethod": "text",
+                    "nullable": true,
+                    "order": 3,
+                    "creationOrder": 4,
+                    "options": []
+                },
+                "merchant_id": {
+                    "type": "bigInteger",
+                    "name": "merchant_id",
+                    "autoIncrement": false,
+                    "unsigned": true,
+                    "table": "social_configuration",
+                    "creatorMethod": "bigInteger",
+                    "order": 4,
+                    "creationOrder": 5,
+                    "options": []
+                },
+                "created_at": {
+                    "type": "timestamp",
+                    "name": "created_at",
+                    "precision": 0,
+                    "table": "social_configuration",
+                    "creatorMethod": "timestamp",
+                    "nullable": true,
+                    "order": 5,
+                    "creationOrder": 6,
+                    "options": []
+                },
+                "updated_at": {
+                    "type": "timestamp",
+                    "name": "updated_at",
+                    "precision": 0,
+                    "table": "social_configuration",
+                    "creatorMethod": "timestamp",
+                    "nullable": true,
+                    "order": 6,
+                    "creationOrder": 7,
+                    "options": []
+                }
+            },
+            "indexes": {
+                "social_configuration_merchant_id_foreign": {
+                    "name": "social_configuration_merchant_id_foreign",
+                    "columns": [
+                        "merchant_id"
+                    ],
+                    "algorithm": null,
+                    "references": "id",
+                    "on": "merchants",
+                    "onDelete": "cascade",
+                    "onUpdate": "cascade",
+                    "table": "social_configuration",
+                    "type": "foreign"
+                }
+            },
+            "uniques": [],
+            "foreigns": [],
+            "migrations": [
+                {
+                    "migration": "\/var\/www\/html\/projects\/salla-wa-inquiry\/database\/migrations\/2024_09_27_125030_001_create_SocialConfigurations_table.php",
+                    "relativePath": "\/database\/migrations\/2024_09_27_125030_001_create_SocialConfigurations_table.php",
+                    "migrationName": "2024_09_27_125030_001_create_SocialConfigurations_table",
+                    "datePrefix": "2024_09_27",
+                    "fullPrefix": "2024_09_27_125030",
+                    "addedColumns": [
+                        {
+                            "type": "bigInteger",
+                            "name": "id",
+                            "autoIncrement": true,
+                            "unsigned": true,
+                            "table": "social_configuration",
+                            "creatorMethod": "id"
+                        },
+                        {
+                            "type": "string",
+                            "name": "merchant_identifier",
+                            "length": 255,
+                            "table": "social_configuration",
+                            "creatorMethod": "string",
+                            "nullable": true
+                        },
+                        {
+                            "type": "text",
+                            "name": "config_name",
+                            "table": "social_configuration",
+                            "creatorMethod": "text",
+                            "nullable": true
+                        },
+                        {
+                            "type": "text",
+                            "name": "config_value",
+                            "table": "social_configuration",
+                            "creatorMethod": "text",
+                            "nullable": true
+                        },
+                        {
+                            "type": "bigInteger",
+                            "name": "merchant_id",
+                            "autoIncrement": false,
+                            "unsigned": true,
+                            "table": "social_configuration",
+                            "creatorMethod": "bigInteger"
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "created_at",
+                            "precision": 0,
+                            "table": "social_configuration",
+                            "creatorMethod": "timestamp",
+                            "nullable": true
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "updated_at",
+                            "precision": 0,
+                            "table": "social_configuration",
+                            "creatorMethod": "timestamp",
+                            "nullable": true
+                        }
+                    ],
+                    "changedColumns": [],
+                    "droppedColumns": [],
+                    "renamedColumns": [],
+                    "commands": [
+                        {
+                            "name": "create",
+                            "table": "social_configuration"
+                        },
+                        {
+                            "name": "foreign",
+                            "index": "social_configuration_merchant_id_foreign",
+                            "columns": [
+                                "merchant_id"
+                            ],
+                            "algorithm": null,
+                            "references": "id",
+                            "on": "merchants",
+                            "onDelete": "cascade",
+                            "onUpdate": "cascade",
+                            "table": "social_configuration"
+                        }
+                    ],
+                    "createdTables": [
+                        "social_configuration"
+                    ],
+                    "renamedTables": [],
+                    "droppedTables": []
+                },
+                {
+                    "migration": "\/var\/www\/html\/projects\/salla-wa-inquiry\/database\/migrations\/2024_09_27_133605_001_update_social_configurations_table.php",
+                    "relativePath": "\/database\/migrations\/2024_09_27_133605_001_update_social_configurations_table.php",
+                    "migrationName": "2024_09_27_133605_001_update_social_configurations_table",
+                    "datePrefix": "2024_09_27",
+                    "fullPrefix": "2024_09_27_133605",
+                    "addedColumns": [],
+                    "changedColumns": [],
+                    "droppedColumns": [
+                        {
+                            "name": "merchant_identifier",
+                            "table": "social_configurations"
+                        }
+                    ],
+                    "renamedColumns": [],
+                    "commands": [
+                        {
+                            "name": "create",
+                            "table": "social_configurations"
+                        },
+                        {
+                            "name": "dropColumn",
+                            "columns": [
+                                "merchant_identifier"
+                            ],
+                            "table": "social_configurations"
+                        }
+                    ],
+                    "createdTables": [],
+                    "renamedTables": [],
+                    "droppedTables": []
+                }
+            ],
+            "oldNames": [
+                "social_configuration"
+            ],
+            "name": "social_configurations"
+        },
+        "magic_logins": {
+            "columns": {
+                "uuid": {
+                    "type": "uuid",
+                    "name": "uuid",
+                    "table": "magic_logins",
+                    "creatorMethod": "uuid",
+                    "order": 0,
+                    "creationOrder": 1,
+                    "options": []
+                },
+                "authenticatable_type": {
+                    "type": "string",
+                    "name": "authenticatable_type",
+                    "length": 255,
+                    "table": "magic_logins",
+                    "creatorMethod": "morphs",
+                    "order": 1,
+                    "creationOrder": 2,
+                    "options": []
+                },
+                "authenticatable_id": {
+                    "type": "bigInteger",
+                    "name": "authenticatable_id",
+                    "autoIncrement": false,
+                    "unsigned": true,
+                    "table": "magic_logins",
+                    "creatorMethod": "morphs",
+                    "order": 2,
+                    "creationOrder": 3,
+                    "options": []
+                },
+                "logins": {
+                    "type": "integer",
+                    "name": "logins",
+                    "autoIncrement": false,
+                    "unsigned": false,
+                    "table": "magic_logins",
+                    "creatorMethod": "integer",
+                    "default": 0,
+                    "order": 3,
+                    "creationOrder": 4,
+                    "options": []
+                },
+                "logins_limit": {
+                    "type": "integer",
+                    "name": "logins_limit",
+                    "autoIncrement": false,
+                    "unsigned": false,
+                    "table": "magic_logins",
+                    "creatorMethod": "integer",
+                    "order": 4,
+                    "creationOrder": 5,
+                    "options": []
+                },
+                "guard": {
+                    "type": "string",
+                    "name": "guard",
+                    "length": 255,
+                    "table": "magic_logins",
+                    "creatorMethod": "string",
+                    "order": 5,
+                    "creationOrder": 6,
+                    "options": []
+                },
+                "redirect_url": {
+                    "type": "string",
+                    "name": "redirect_url",
+                    "length": 255,
+                    "table": "magic_logins",
+                    "creatorMethod": "string",
+                    "order": 6,
+                    "creationOrder": 7,
+                    "options": []
+                },
+                "expires_at": {
+                    "type": "dateTime",
+                    "name": "expires_at",
+                    "precision": 0,
+                    "table": "magic_logins",
+                    "creatorMethod": "dateTime",
+                    "order": 7,
+                    "creationOrder": 8,
+                    "options": []
+                },
+                "metadata": {
+                    "type": "json",
+                    "name": "metadata",
+                    "table": "magic_logins",
+                    "creatorMethod": "json",
+                    "order": 8,
+                    "creationOrder": 9,
+                    "options": []
+                },
+                "created_at": {
+                    "type": "timestamp",
+                    "name": "created_at",
+                    "precision": 0,
+                    "table": "magic_logins",
+                    "creatorMethod": "timestamps",
+                    "nullable": true,
+                    "order": 9,
+                    "creationOrder": 10,
+                    "options": []
+                },
+                "updated_at": {
+                    "type": "timestamp",
+                    "name": "updated_at",
+                    "precision": 0,
+                    "table": "magic_logins",
+                    "creatorMethod": "timestamps",
+                    "nullable": true,
+                    "order": 10,
+                    "creationOrder": 11,
+                    "options": []
+                }
+            },
+            "indexes": {
+                "magic_logins_authenticatable_type_authenticatable_id_index": {
+                    "name": "magic_logins_authenticatable_type_authenticatable_id_index",
+                    "columns": [
+                        "authenticatable_type",
+                        "authenticatable_id"
+                    ],
+                    "algorithm": null,
+                    "table": "magic_logins",
+                    "type": "index"
+                }
+            },
+            "uniques": [],
+            "foreigns": [],
+            "migrations": [
+                {
+                    "migration": "\/var\/www\/html\/projects\/salla-wa-inquiry\/database\/migrations\/2024_11_15_184425_create_magic_logins_table.php",
+                    "relativePath": "\/database\/migrations\/2024_11_15_184425_create_magic_logins_table.php",
+                    "migrationName": "2024_11_15_184425_create_magic_logins_table",
+                    "datePrefix": "2024_11_15",
+                    "fullPrefix": "2024_11_15_184425",
+                    "addedColumns": [
+                        {
+                            "type": "uuid",
+                            "name": "uuid",
+                            "table": "magic_logins",
+                            "creatorMethod": "uuid"
+                        },
+                        {
+                            "type": "string",
+                            "name": "authenticatable_type",
+                            "length": 255,
+                            "table": "magic_logins",
+                            "creatorMethod": "morphs"
+                        },
+                        {
+                            "type": "bigInteger",
+                            "name": "authenticatable_id",
+                            "autoIncrement": false,
+                            "unsigned": true,
+                            "table": "magic_logins",
+                            "creatorMethod": "morphs"
+                        },
+                        {
+                            "type": "integer",
+                            "name": "logins",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "magic_logins",
+                            "creatorMethod": "integer",
+                            "default": 0
+                        },
+                        {
+                            "type": "integer",
+                            "name": "logins_limit",
+                            "autoIncrement": false,
+                            "unsigned": false,
+                            "table": "magic_logins",
+                            "creatorMethod": "integer"
+                        },
+                        {
+                            "type": "string",
+                            "name": "guard",
+                            "length": 255,
+                            "table": "magic_logins",
+                            "creatorMethod": "string"
+                        },
+                        {
+                            "type": "string",
+                            "name": "redirect_url",
+                            "length": 255,
+                            "table": "magic_logins",
+                            "creatorMethod": "string"
+                        },
+                        {
+                            "type": "dateTime",
+                            "name": "expires_at",
+                            "precision": 0,
+                            "table": "magic_logins",
+                            "creatorMethod": "dateTime"
+                        },
+                        {
+                            "type": "json",
+                            "name": "metadata",
+                            "table": "magic_logins",
+                            "creatorMethod": "json"
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "created_at",
+                            "precision": 0,
+                            "table": "magic_logins",
+                            "creatorMethod": "timestamps",
+                            "nullable": true
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "updated_at",
+                            "precision": 0,
+                            "table": "magic_logins",
+                            "creatorMethod": "timestamps",
+                            "nullable": true
+                        }
+                    ],
+                    "changedColumns": [],
+                    "droppedColumns": [],
+                    "renamedColumns": [],
+                    "commands": [
+                        {
+                            "name": "create",
+                            "table": "magic_logins"
+                        },
+                        {
+                            "name": "index",
+                            "index": "magic_logins_authenticatable_type_authenticatable_id_index",
+                            "columns": [
+                                "authenticatable_type",
+                                "authenticatable_id"
+                            ],
+                            "algorithm": null,
+                            "table": "magic_logins"
+                        }
+                    ],
+                    "createdTables": [
+                        "magic_logins"
+                    ],
+                    "renamedTables": [],
+                    "droppedTables": []
+                }
+            ],
+            "oldNames": [],
+            "name": "magic_logins"
+        },
+        "store_product_reviews_merchants": {
+            "columns": {
+                "id": {
+                    "type": "bigInteger",
+                    "name": "id",
+                    "autoIncrement": true,
+                    "unsigned": true,
+                    "table": "store_product_reviews_merchants",
+                    "creatorMethod": "id",
+                    "order": 0,
+                    "creationOrder": 1,
+                    "options": []
+                },
+                "merchant_identifier": {
+                    "type": "string",
+                    "name": "merchant_identifier",
+                    "length": 255,
+                    "table": "store_product_reviews_merchants",
+                    "creatorMethod": "string",
+                    "nullable": true,
+                    "order": 1,
+                    "creationOrder": 2,
+                    "options": []
+                },
+                "name": {
+                    "type": "string",
+                    "name": "name",
+                    "length": 255,
+                    "table": "store_product_reviews_merchants",
+                    "creatorMethod": "string",
+                    "nullable": true,
+                    "order": 2,
+                    "creationOrder": 3,
+                    "options": []
+                },
+                "email": {
+                    "type": "string",
+                    "name": "email",
+                    "length": 255,
+                    "table": "store_product_reviews_merchants",
+                    "creatorMethod": "string",
+                    "nullable": true,
+                    "order": 3,
+                    "creationOrder": 4,
+                    "options": []
+                },
+                "store_link": {
+                    "type": "string",
+                    "name": "store_link",
+                    "length": 255,
+                    "table": "store_product_reviews_merchants",
+                    "creatorMethod": "string",
+                    "nullable": true,
+                    "order": 4,
+                    "creationOrder": 5,
+                    "options": []
+                },
+                "store_reference": {
+                    "type": "string",
+                    "name": "store_reference",
+                    "length": 255,
+                    "table": "store_product_reviews_merchants",
+                    "creatorMethod": "string",
+                    "nullable": true,
+                    "order": 5,
+                    "creationOrder": 6,
+                    "options": []
+                },
+                "access_token": {
+                    "type": "longText",
+                    "name": "access_token",
+                    "table": "store_product_reviews_merchants",
+                    "creatorMethod": "longText",
+                    "nullable": true,
+                    "order": 6,
+                    "creationOrder": 7,
+                    "options": []
+                },
+                "refresh_token": {
+                    "type": "longText",
+                    "name": "refresh_token",
+                    "table": "store_product_reviews_merchants",
+                    "creatorMethod": "longText",
+                    "nullable": true,
+                    "order": 7,
+                    "creationOrder": 8,
+                    "options": []
+                },
+                "token_exp": {
+                    "type": "date",
+                    "name": "token_exp",
+                    "table": "store_product_reviews_merchants",
+                    "creatorMethod": "date",
+                    "nullable": true,
+                    "order": 8,
+                    "creationOrder": 9,
+                    "options": []
+                },
+                "created_at": {
+                    "type": "timestamp",
+                    "name": "created_at",
+                    "precision": 0,
+                    "table": "store_product_reviews_merchants",
+                    "creatorMethod": "timestamp",
+                    "nullable": true,
+                    "order": 9,
+                    "creationOrder": 10,
+                    "options": []
+                },
+                "updated_at": {
+                    "type": "timestamp",
+                    "name": "updated_at",
+                    "precision": 0,
+                    "table": "store_product_reviews_merchants",
+                    "creatorMethod": "timestamp",
+                    "nullable": true,
+                    "order": 10,
+                    "creationOrder": 11,
+                    "options": []
+                }
+            },
+            "indexes": [],
+            "uniques": [],
+            "foreigns": [],
+            "migrations": [
+                {
+                    "migration": "\/var\/www\/html\/projects\/salla-wa-inquiry\/database\/migrations\/2025_05_05_060724_001_create_store_product_reviews_merchants_table.php",
+                    "relativePath": "\/database\/migrations\/2025_05_05_060724_001_create_store_product_reviews_merchants_table.php",
+                    "migrationName": "2025_05_05_060724_001_create_store_product_reviews_merchants_table",
+                    "datePrefix": "2025_05_05",
+                    "fullPrefix": "2025_05_05_060724",
+                    "addedColumns": [
+                        {
+                            "type": "bigInteger",
+                            "name": "id",
+                            "autoIncrement": true,
+                            "unsigned": true,
+                            "table": "store_product_reviews_merchants",
+                            "creatorMethod": "id"
+                        },
+                        {
+                            "type": "string",
+                            "name": "merchant_identifier",
+                            "length": 255,
+                            "table": "store_product_reviews_merchants",
+                            "creatorMethod": "string",
+                            "nullable": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "name",
+                            "length": 255,
+                            "table": "store_product_reviews_merchants",
+                            "creatorMethod": "string",
+                            "nullable": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "email",
+                            "length": 255,
+                            "table": "store_product_reviews_merchants",
+                            "creatorMethod": "string",
+                            "nullable": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "store_link",
+                            "length": 255,
+                            "table": "store_product_reviews_merchants",
+                            "creatorMethod": "string",
+                            "nullable": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "store_reference",
+                            "length": 255,
+                            "table": "store_product_reviews_merchants",
+                            "creatorMethod": "string",
+                            "nullable": true
+                        },
+                        {
+                            "type": "longText",
+                            "name": "access_token",
+                            "table": "store_product_reviews_merchants",
+                            "creatorMethod": "longText",
+                            "nullable": true
+                        },
+                        {
+                            "type": "longText",
+                            "name": "refresh_token",
+                            "table": "store_product_reviews_merchants",
+                            "creatorMethod": "longText",
+                            "nullable": true
+                        },
+                        {
+                            "type": "date",
+                            "name": "token_exp",
+                            "table": "store_product_reviews_merchants",
+                            "creatorMethod": "date",
+                            "nullable": true
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "created_at",
+                            "precision": 0,
+                            "table": "store_product_reviews_merchants",
+                            "creatorMethod": "timestamp",
+                            "nullable": true
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "updated_at",
+                            "precision": 0,
+                            "table": "store_product_reviews_merchants",
+                            "creatorMethod": "timestamp",
+                            "nullable": true
+                        }
+                    ],
+                    "changedColumns": [],
+                    "droppedColumns": [],
+                    "renamedColumns": [],
+                    "commands": [
+                        {
+                            "name": "create",
+                            "table": "store_product_reviews_merchants"
+                        }
+                    ],
+                    "createdTables": [
+                        "store_product_reviews_merchants"
+                    ],
+                    "renamedTables": [],
+                    "droppedTables": []
+                }
+            ],
+            "oldNames": [],
+            "name": "store_product_reviews_merchants"
+        },
+        "store_and_product_webhooks": {
+            "columns": {
+                "id": {
+                    "type": "bigInteger",
+                    "name": "id",
+                    "autoIncrement": true,
+                    "unsigned": true,
+                    "table": "store_and_product_webhooks",
+                    "creatorMethod": "id",
+                    "order": 0,
+                    "creationOrder": 1,
+                    "options": []
+                },
+                "event": {
+                    "type": "string",
+                    "name": "event",
+                    "length": 255,
+                    "table": "store_and_product_webhooks",
+                    "creatorMethod": "string",
+                    "nullable": true,
+                    "order": 1,
+                    "creationOrder": 2,
+                    "options": []
+                },
+                "reference_number": {
+                    "type": "string",
+                    "name": "reference_number",
+                    "length": 255,
+                    "table": "store_and_product_webhooks",
+                    "creatorMethod": "string",
+                    "nullable": true,
+                    "order": 2,
+                    "creationOrder": 3,
+                    "options": []
+                },
+                "merchant": {
+                    "type": "string",
+                    "name": "merchant",
+                    "length": 255,
+                    "table": "store_and_product_webhooks",
+                    "creatorMethod": "string",
+                    "order": 3,
+                    "creationOrder": 4,
+                    "options": []
+                },
+                "payload": {
+                    "type": "longText",
+                    "name": "payload",
+                    "table": "store_and_product_webhooks",
+                    "creatorMethod": "longText",
+                    "order": 4,
+                    "creationOrder": 5,
+                    "options": []
+                },
+                "created_at": {
+                    "type": "timestamp",
+                    "name": "created_at",
+                    "precision": 0,
+                    "table": "store_and_product_webhooks",
+                    "creatorMethod": "timestamp",
+                    "nullable": true,
+                    "order": 5,
+                    "creationOrder": 6,
+                    "options": []
+                },
+                "updated_at": {
+                    "type": "timestamp",
+                    "name": "updated_at",
+                    "precision": 0,
+                    "table": "store_and_product_webhooks",
+                    "creatorMethod": "timestamp",
+                    "nullable": true,
+                    "order": 6,
+                    "creationOrder": 7,
+                    "options": []
+                }
+            },
+            "indexes": [],
+            "uniques": [],
+            "foreigns": [],
+            "migrations": [
+                {
+                    "migration": "\/var\/www\/html\/projects\/salla-wa-inquiry\/database\/migrations\/2025_05_05_060724_002_create_store_and_product_webhooks_table.php",
+                    "relativePath": "\/database\/migrations\/2025_05_05_060724_002_create_store_and_product_webhooks_table.php",
+                    "migrationName": "2025_05_05_060724_002_create_store_and_product_webhooks_table",
+                    "datePrefix": "2025_05_05",
+                    "fullPrefix": "2025_05_05_060724",
+                    "addedColumns": [
+                        {
+                            "type": "bigInteger",
+                            "name": "id",
+                            "autoIncrement": true,
+                            "unsigned": true,
+                            "table": "store_and_product_webhooks",
+                            "creatorMethod": "id"
+                        },
+                        {
+                            "type": "string",
+                            "name": "event",
+                            "length": 255,
+                            "table": "store_and_product_webhooks",
+                            "creatorMethod": "string",
+                            "nullable": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "reference_number",
+                            "length": 255,
+                            "table": "store_and_product_webhooks",
+                            "creatorMethod": "string",
+                            "nullable": true
+                        },
+                        {
+                            "type": "string",
+                            "name": "merchant",
+                            "length": 255,
+                            "table": "store_and_product_webhooks",
+                            "creatorMethod": "string"
+                        },
+                        {
+                            "type": "longText",
+                            "name": "payload",
+                            "table": "store_and_product_webhooks",
+                            "creatorMethod": "longText"
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "created_at",
+                            "precision": 0,
+                            "table": "store_and_product_webhooks",
+                            "creatorMethod": "timestamp",
+                            "nullable": true
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "updated_at",
+                            "precision": 0,
+                            "table": "store_and_product_webhooks",
+                            "creatorMethod": "timestamp",
+                            "nullable": true
+                        }
+                    ],
+                    "changedColumns": [],
+                    "droppedColumns": [],
+                    "renamedColumns": [],
+                    "commands": [
+                        {
+                            "name": "create",
+                            "table": "store_and_product_webhooks"
+                        }
+                    ],
+                    "createdTables": [
+                        "store_and_product_webhooks"
+                    ],
+                    "renamedTables": [],
+                    "droppedTables": []
+                }
+            ],
+            "oldNames": [],
+            "name": "store_and_product_webhooks"
+        },
+        "store_product_reviews_configurations": {
+            "columns": {
+                "id": {
+                    "type": "bigInteger",
+                    "name": "id",
+                    "autoIncrement": true,
+                    "unsigned": true,
+                    "table": "store_product_reviews_configurations",
+                    "creatorMethod": "id",
+                    "order": 0,
+                    "creationOrder": 1,
+                    "options": []
+                },
+                "config_name": {
+                    "type": "text",
+                    "name": "config_name",
+                    "table": "store_product_reviews_configurations",
+                    "creatorMethod": "text",
+                    "nullable": true,
+                    "order": 1,
+                    "creationOrder": 2,
+                    "options": []
+                },
+                "config_value": {
+                    "type": "text",
+                    "name": "config_value",
+                    "table": "store_product_reviews_configurations",
+                    "creatorMethod": "text",
+                    "nullable": true,
+                    "order": 2,
+                    "creationOrder": 3,
+                    "options": []
+                },
+                "product_merchant_id": {
+                    "type": "bigInteger",
+                    "name": "product_merchant_id",
+                    "autoIncrement": false,
+                    "unsigned": true,
+                    "table": "store_product_reviews_configurations",
+                    "creatorMethod": "bigInteger",
+                    "order": 3,
+                    "creationOrder": 4,
+                    "options": []
+                },
+                "created_at": {
+                    "type": "timestamp",
+                    "name": "created_at",
+                    "precision": 0,
+                    "table": "store_product_reviews_configurations",
+                    "creatorMethod": "timestamp",
+                    "nullable": true,
+                    "order": 4,
+                    "creationOrder": 5,
+                    "options": []
+                },
+                "updated_at": {
+                    "type": "timestamp",
+                    "name": "updated_at",
+                    "precision": 0,
+                    "table": "store_product_reviews_configurations",
+                    "creatorMethod": "timestamp",
+                    "nullable": true,
+                    "order": 5,
+                    "creationOrder": 6,
+                    "options": []
+                }
+            },
+            "indexes": {
+                "store_product_reviews_configurations_product_merchant_id_foreign": {
+                    "name": "store_product_reviews_configurations_product_merchant_id_foreign",
+                    "columns": [
+                        "product_merchant_id"
+                    ],
+                    "algorithm": null,
+                    "references": "id",
+                    "on": "store_product_reviews_merchants",
+                    "onDelete": "cascade",
+                    "onUpdate": "cascade",
+                    "table": "store_product_reviews_configurations",
+                    "type": "foreign"
+                }
+            },
+            "uniques": [],
+            "foreigns": [],
+            "migrations": [
+                {
+                    "migration": "\/var\/www\/html\/projects\/salla-wa-inquiry\/database\/migrations\/2025_05_05_060724_003_create_store_product_reviews_configurations_table.php",
+                    "relativePath": "\/database\/migrations\/2025_05_05_060724_003_create_store_product_reviews_configurations_table.php",
+                    "migrationName": "2025_05_05_060724_003_create_store_product_reviews_configurations_table",
+                    "datePrefix": "2025_05_05",
+                    "fullPrefix": "2025_05_05_060724",
+                    "addedColumns": [
+                        {
+                            "type": "bigInteger",
+                            "name": "id",
+                            "autoIncrement": true,
+                            "unsigned": true,
+                            "table": "store_product_reviews_configurations",
+                            "creatorMethod": "id"
+                        },
+                        {
+                            "type": "text",
+                            "name": "config_name",
+                            "table": "store_product_reviews_configurations",
+                            "creatorMethod": "text",
+                            "nullable": true
+                        },
+                        {
+                            "type": "text",
+                            "name": "config_value",
+                            "table": "store_product_reviews_configurations",
+                            "creatorMethod": "text",
+                            "nullable": true
+                        },
+                        {
+                            "type": "bigInteger",
+                            "name": "product_merchant_id",
+                            "autoIncrement": false,
+                            "unsigned": true,
+                            "table": "store_product_reviews_configurations",
+                            "creatorMethod": "bigInteger"
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "created_at",
+                            "precision": 0,
+                            "table": "store_product_reviews_configurations",
+                            "creatorMethod": "timestamp",
+                            "nullable": true
+                        },
+                        {
+                            "type": "timestamp",
+                            "name": "updated_at",
+                            "precision": 0,
+                            "table": "store_product_reviews_configurations",
+                            "creatorMethod": "timestamp",
+                            "nullable": true
+                        }
+                    ],
+                    "changedColumns": [],
+                    "droppedColumns": [],
+                    "renamedColumns": [],
+                    "commands": [
+                        {
+                            "name": "create",
+                            "table": "store_product_reviews_configurations"
+                        },
+                        {
+                            "name": "foreign",
+                            "index": "store_product_reviews_configurations_product_merchant_id_foreign",
+                            "columns": [
+                                "product_merchant_id"
+                            ],
+                            "algorithm": null,
+                            "references": "id",
+                            "on": "store_product_reviews_merchants",
+                            "onDelete": "cascade",
+                            "onUpdate": "cascade",
+                            "table": "store_product_reviews_configurations"
+                        }
+                    ],
+                    "createdTables": [
+                        "store_product_reviews_configurations"
+                    ],
+                    "renamedTables": [],
+                    "droppedTables": []
+                }
+            ],
+            "oldNames": [],
+            "name": "store_product_reviews_configurations"
+        }
+    },
+    "models": [
+        {
+            "fileName": "FacebookConfig.php",
+            "name": "FacebookConfig",
+            "tableName": "SocialConfiguration",
+            "class": "App\\Models\\FacebookConfig",
+            "namespace": "App\\Models",
+            "path": "Models\/FacebookConfig.php",
+            "allImports": [
+                "Illuminate\\Database\\Eloquent\\Model",
+                "Illuminate\\Database\\Eloquent\\Factories\\HasFactory"
+            ],
+            "parentClass": "Illuminate\\Database\\Eloquent\\Model",
+            "interfaces": [],
+            "traits": [
+                "Illuminate\\Database\\Eloquent\\Factories\\HasFactory"
+            ],
+            "hasFillable": false,
+            "fillable": [],
+            "hasCasts": false,
+            "casts": [],
+            "hasGuarded": true,
+            "guarded": [],
+            "hasHidden": false,
+            "hidden": [],
+            "hasDates": false,
+            "dates": [],
+            "hasAppends": false,
+            "appends": [],
+            "relationships": [
+                {
+                    "name": "merchant",
+                    "type": "BelongsTo",
+                    "foreignKeyName": "merchant_id",
+                    "ownerKeyName": "id",
+                    "foreignPivotKeyName": null,
+                    "relatedPivotKeyName": null,
+                    "parentKeyName": null,
+                    "relatedKeyName": null,
+                    "pivotTableName": null,
+                    "morphType": null,
+                    "localKeyName": null,
+                    "firstKeyName": null,
+                    "secondKeyName": null,
+                    "relatedTableName": "merchants",
+                    "relatedModelName": "App\\Models\\Merchant",
+                    "parentTableName": "SocialConfiguration",
+                    "parentModelName": "App\\Models\\FacebookConfig",
+                    "method": "    public function merchant()\n    {\n        return $this->belongsTo(Merchant::class);\n    }\n",
+                    "withPivotColumns": false,
+                    "includedPivotColumns": []
+                }
+            ],
+            "methods": [],
+            "hasTimestamps": true,
+            "hasSoftDeletes": false,
+            "isAuthenticatable": false
+        },
+        {
+            "fileName": "Merchant.php",
+            "name": "Merchant",
+            "tableName": "merchants",
+            "class": "App\\Models\\Merchant",
+            "namespace": "App\\Models",
+            "path": "Models\/Merchant.php",
+            "allImports": [
+                "Illuminate\\Database\\Eloquent\\Model",
+                "Illuminate\\Database\\Eloquent\\Factories\\HasFactory"
+            ],
+            "parentClass": "Illuminate\\Database\\Eloquent\\Model",
+            "interfaces": [],
+            "traits": [
+                "Illuminate\\Database\\Eloquent\\Factories\\HasFactory"
+            ],
+            "hasFillable": false,
+            "fillable": [],
+            "hasCasts": false,
+            "casts": [],
+            "hasGuarded": true,
+            "guarded": [],
+            "hasHidden": false,
+            "hidden": [],
+            "hasDates": false,
+            "dates": [],
+            "hasAppends": false,
+            "appends": [],
+            "relationships": [
+                {
+                    "name": "facebookConfigs",
+                    "type": "HasMany",
+                    "foreignKeyName": "merchant_id",
+                    "ownerKeyName": null,
+                    "foreignPivotKeyName": null,
+                    "relatedPivotKeyName": null,
+                    "parentKeyName": null,
+                    "relatedKeyName": null,
+                    "pivotTableName": null,
+                    "morphType": null,
+                    "localKeyName": "id",
+                    "firstKeyName": null,
+                    "secondKeyName": null,
+                    "relatedTableName": "SocialConfiguration",
+                    "relatedModelName": "App\\Models\\FacebookConfig",
+                    "parentTableName": "merchants",
+                    "parentModelName": "App\\Models\\Merchant",
+                    "method": "    public function facebookConfigs()\n    {\n        return $this->hasMany(FacebookConfig::class);\n    }\n",
+                    "withPivotColumns": false,
+                    "includedPivotColumns": []
+                },
+                {
+                    "name": "socialConfigurations",
+                    "type": "HasMany",
+                    "foreignKeyName": "merchant_id",
+                    "ownerKeyName": null,
+                    "foreignPivotKeyName": null,
+                    "relatedPivotKeyName": null,
+                    "parentKeyName": null,
+                    "relatedKeyName": null,
+                    "pivotTableName": null,
+                    "morphType": null,
+                    "localKeyName": "id",
+                    "firstKeyName": null,
+                    "secondKeyName": null,
+                    "relatedTableName": "social_configurations",
+                    "relatedModelName": "App\\Models\\SocialConfiguration",
+                    "parentTableName": "merchants",
+                    "parentModelName": "App\\Models\\Merchant",
+                    "method": "    public function socialConfigurations()\n    {\n        return $this->hasMany(SocialConfiguration::class);\n    }\n",
+                    "withPivotColumns": false,
+                    "includedPivotColumns": []
+                }
+            ],
+            "methods": [],
+            "hasTimestamps": true,
+            "hasSoftDeletes": false,
+            "isAuthenticatable": false
+        },
+        {
+            "fileName": "SocialConfiguration.php",
+            "name": "SocialConfiguration",
+            "tableName": "social_configurations",
+            "class": "App\\Models\\SocialConfiguration",
+            "namespace": "App\\Models",
+            "path": "Models\/SocialConfiguration.php",
+            "allImports": [
+                "Illuminate\\Database\\Eloquent\\Model",
+                "Illuminate\\Database\\Eloquent\\Factories\\HasFactory"
+            ],
+            "parentClass": "Illuminate\\Database\\Eloquent\\Model",
+            "interfaces": [],
+            "traits": [
+                "Illuminate\\Database\\Eloquent\\Factories\\HasFactory"
+            ],
+            "hasFillable": false,
+            "fillable": [],
+            "hasCasts": false,
+            "casts": [],
+            "hasGuarded": true,
+            "guarded": [],
+            "hasHidden": false,
+            "hidden": [],
+            "hasDates": false,
+            "dates": [],
+            "hasAppends": false,
+            "appends": [],
+            "relationships": [
+                {
+                    "name": "merchant",
+                    "type": "BelongsTo",
+                    "foreignKeyName": "merchant_id",
+                    "ownerKeyName": "id",
+                    "foreignPivotKeyName": null,
+                    "relatedPivotKeyName": null,
+                    "parentKeyName": null,
+                    "relatedKeyName": null,
+                    "pivotTableName": null,
+                    "morphType": null,
+                    "localKeyName": null,
+                    "firstKeyName": null,
+                    "secondKeyName": null,
+                    "relatedTableName": "merchants",
+                    "relatedModelName": "App\\Models\\Merchant",
+                    "parentTableName": "social_configurations",
+                    "parentModelName": "App\\Models\\SocialConfiguration",
+                    "method": "    public function merchant()\n    {\n        return $this->belongsTo(Merchant::class);\n    }\n",
+                    "withPivotColumns": false,
+                    "includedPivotColumns": []
+                }
+            ],
+            "methods": [],
+            "hasTimestamps": true,
+            "hasSoftDeletes": false,
+            "isAuthenticatable": false
+        },
+        {
+            "fileName": "StoreAndProductWebhook.php",
+            "name": "StoreAndProductWebhook",
+            "tableName": "store_and_product_webhooks",
+            "class": "App\\Models\\StoreAndProductWebhook",
+            "namespace": "App\\Models",
+            "path": "Models\/StoreAndProductWebhook.php",
+            "allImports": [
+                "Illuminate\\Database\\Eloquent\\Model",
+                "Illuminate\\Database\\Eloquent\\Factories\\HasFactory"
+            ],
+            "parentClass": "Illuminate\\Database\\Eloquent\\Model",
+            "interfaces": [],
+            "traits": [
+                "Illuminate\\Database\\Eloquent\\Factories\\HasFactory"
+            ],
+            "hasFillable": false,
+            "fillable": [],
+            "hasCasts": false,
+            "casts": [],
+            "hasGuarded": true,
+            "guarded": [],
+            "hasHidden": false,
+            "hidden": [],
+            "hasDates": false,
+            "dates": [],
+            "hasAppends": false,
+            "appends": [],
+            "relationships": [],
+            "methods": [],
+            "hasTimestamps": true,
+            "hasSoftDeletes": false,
+            "isAuthenticatable": false
+        },
+        {
+            "fileName": "StoreProductReviewsConfiguration.php",
+            "name": "StoreProductReviewsConfiguration",
+            "tableName": "store_product_reviews_configurations",
+            "class": "App\\Models\\StoreProductReviewsConfiguration",
+            "namespace": "App\\Models",
+            "path": "Models\/StoreProductReviewsConfiguration.php",
+            "allImports": [
+                "Illuminate\\Database\\Eloquent\\Model",
+                "Illuminate\\Database\\Eloquent\\Factories\\HasFactory"
+            ],
+            "parentClass": "Illuminate\\Database\\Eloquent\\Model",
+            "interfaces": [],
+            "traits": [
+                "Illuminate\\Database\\Eloquent\\Factories\\HasFactory"
+            ],
+            "hasFillable": false,
+            "fillable": [],
+            "hasCasts": false,
+            "casts": [],
+            "hasGuarded": true,
+            "guarded": [],
+            "hasHidden": false,
+            "hidden": [],
+            "hasDates": false,
+            "dates": [],
+            "hasAppends": false,
+            "appends": [],
+            "relationships": [
+                {
+                    "name": "storeProductReviewsMerchant",
+                    "type": "BelongsTo",
+                    "foreignKeyName": "store_product_reviews_merchant_id",
+                    "ownerKeyName": "id",
+                    "foreignPivotKeyName": null,
+                    "relatedPivotKeyName": null,
+                    "parentKeyName": null,
+                    "relatedKeyName": null,
+                    "pivotTableName": null,
+                    "morphType": null,
+                    "localKeyName": null,
+                    "firstKeyName": null,
+                    "secondKeyName": null,
+                    "relatedTableName": "store_product_reviews_merchants",
+                    "relatedModelName": "App\\Models\\StoreProductReviewsMerchant",
+                    "parentTableName": "store_product_reviews_configurations",
+                    "parentModelName": "App\\Models\\StoreProductReviewsConfiguration",
+                    "method": "    public function storeProductReviewsMerchant()\n    {\n        return $this->belongsTo(StoreProductReviewsMerchant::class);\n    }\n",
+                    "withPivotColumns": false,
+                    "includedPivotColumns": []
+                }
+            ],
+            "methods": [],
+            "hasTimestamps": true,
+            "hasSoftDeletes": false,
+            "isAuthenticatable": false
+        },
+        {
+            "fileName": "StoreProductReviewsMerchant.php",
+            "name": "StoreProductReviewsMerchant",
+            "tableName": "store_product_reviews_merchants",
+            "class": "App\\Models\\StoreProductReviewsMerchant",
+            "namespace": "App\\Models",
+            "path": "Models\/StoreProductReviewsMerchant.php",
+            "allImports": [
+                "Illuminate\\Database\\Eloquent\\Model",
+                "Illuminate\\Database\\Eloquent\\Factories\\HasFactory"
+            ],
+            "parentClass": "Illuminate\\Database\\Eloquent\\Model",
+            "interfaces": [],
+            "traits": [
+                "Illuminate\\Database\\Eloquent\\Factories\\HasFactory"
+            ],
+            "hasFillable": false,
+            "fillable": [],
+            "hasCasts": false,
+            "casts": [],
+            "hasGuarded": true,
+            "guarded": [],
+            "hasHidden": false,
+            "hidden": [],
+            "hasDates": false,
+            "dates": [],
+            "hasAppends": false,
+            "appends": [],
+            "relationships": [
+                {
+                    "name": "storeProductReviewsConfigurations",
+                    "type": "HasMany",
+                    "foreignKeyName": "store_product_reviews_merchant_id",
+                    "ownerKeyName": null,
+                    "foreignPivotKeyName": null,
+                    "relatedPivotKeyName": null,
+                    "parentKeyName": null,
+                    "relatedKeyName": null,
+                    "pivotTableName": null,
+                    "morphType": null,
+                    "localKeyName": "id",
+                    "firstKeyName": null,
+                    "secondKeyName": null,
+                    "relatedTableName": "store_product_reviews_configurations",
+                    "relatedModelName": "App\\Models\\StoreProductReviewsConfiguration",
+                    "parentTableName": "store_product_reviews_merchants",
+                    "parentModelName": "App\\Models\\StoreProductReviewsMerchant",
+                    "method": "    public function storeProductReviewsConfigurations()\n    {\n        return $this->hasMany(StoreProductReviewsConfiguration::class);\n    }\n",
+                    "withPivotColumns": false,
+                    "includedPivotColumns": []
+                }
+            ],
+            "methods": [],
+            "hasTimestamps": true,
+            "hasSoftDeletes": false,
+            "isAuthenticatable": false
+        },
+        {
+            "fileName": "User.php",
+            "name": "User",
+            "tableName": "users",
+            "class": "App\\Models\\User",
+            "namespace": "App\\Models",
+            "path": "Models\/User.php",
+            "allImports": [
+                "Illuminate\\Contracts\\Auth\\MustVerifyEmail",
+                "Illuminate\\Database\\Eloquent\\Factories\\HasFactory",
+                "Illuminate\\Foundation\\Auth\\User as Authenticatable",
+                "Illuminate\\Notifications\\Notifiable"
+            ],
+            "parentClass": "Illuminate\\Foundation\\Auth\\User as Authenticatable",
+            "interfaces": [],
+            "traits": [
+                "Illuminate\\Database\\Eloquent\\Factories\\HasFactory",
+                "Illuminate\\Notifications\\Notifiable"
+            ],
+            "hasFillable": true,
+            "fillable": [
+                "name",
+                "email",
+                "password"
+            ],
+            "hasCasts": true,
+            "casts": {
+                "email_verified_at": "datetime",
+                "password": "hashed"
+            },
+            "hasGuarded": false,
+            "guarded": [
+                "*"
+            ],
+            "hasHidden": true,
+            "hidden": [
+                "password",
+                "remember_token"
+            ],
+            "hasDates": false,
+            "dates": [],
+            "hasAppends": false,
+            "appends": [],
+            "relationships": [],
+            "methods": [],
+            "hasTimestamps": true,
+            "hasSoftDeletes": false,
+            "isAuthenticatable": true
+        },
+        {
+            "fileName": "Webhook.php",
+            "name": "Webhook",
+            "tableName": "webhooks",
+            "class": "App\\Models\\Webhook",
+            "namespace": "App\\Models",
+            "path": "Models\/Webhook.php",
+            "allImports": [
+                "Illuminate\\Database\\Eloquent\\Model",
+                "Illuminate\\Database\\Eloquent\\Factories\\HasFactory"
+            ],
+            "parentClass": "Illuminate\\Database\\Eloquent\\Model",
+            "interfaces": [],
+            "traits": [
+                "Illuminate\\Database\\Eloquent\\Factories\\HasFactory"
+            ],
+            "hasFillable": false,
+            "fillable": [],
+            "hasCasts": false,
+            "casts": [],
+            "hasGuarded": true,
+            "guarded": [],
+            "hasHidden": false,
+            "hidden": [],
+            "hasDates": false,
+            "dates": [],
+            "hasAppends": false,
+            "appends": [],
+            "relationships": [
+                {
+                    "name": "merchant",
+                    "type": "BelongsTo",
+                    "foreignKeyName": "merchant_id",
+                    "ownerKeyName": "id",
+                    "foreignPivotKeyName": null,
+                    "relatedPivotKeyName": null,
+                    "parentKeyName": null,
+                    "relatedKeyName": null,
+                    "pivotTableName": null,
+                    "morphType": null,
+                    "localKeyName": null,
+                    "firstKeyName": null,
+                    "secondKeyName": null,
+                    "relatedTableName": "merchants",
+                    "relatedModelName": "App\\Models\\Merchant",
+                    "parentTableName": "webhooks",
+                    "parentModelName": "App\\Models\\Webhook",
+                    "method": "    public function merchant()\n    {\n        return $this->belongsTo(Merchant::class);\n    }\n",
+                    "withPivotColumns": false,
+                    "includedPivotColumns": []
+                }
+            ],
+            "methods": [],
+            "hasTimestamps": true,
+            "hasSoftDeletes": false,
+            "isAuthenticatable": false
+        }
+    ]
+}

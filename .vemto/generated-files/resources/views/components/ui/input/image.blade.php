@@ -1,3 +1,5 @@
+
+
 @props([
     'src' => '',
     'accept' => 'image/*',

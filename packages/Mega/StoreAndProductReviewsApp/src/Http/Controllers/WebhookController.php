@@ -1,0 +1,90 @@
+<?php
+
+namespace Mega\StoreAndProductReviewsApp\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Models\StoreAndProductWebhook;
+use App\Models\StoreProductReviewsMerchant;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Psr\Log\LoggerInterface;
+
+class WebhookController extends Controller
+{
+    private LoggerInterface $logger;
+
+    public function __construct()
+    {
+        $this->logger = Log::channel('product_reviews');
+    }
+
+    public function index(Request $request)
+    {
+        $params = $request->all();
+        try{
+            $this->logger->info('webhook request: '.json_encode($params));
+            $webhook = StoreAndProductWebhook::create([
+                'event' => $params['event'],
+                'merchant' => $params['merchant'],
+                'status'  => 'success',
+                'payload' => json_encode($params),
+                'reference_number' => $params['data']['id'] ?? $params['data']['id'] ?? "-",
+            ]);
+
+        }catch (\Exception $e){
+            $this->logger->info($e->getMessage());
+        }
+        $event = $params['event'];
+        $resp = [];
+        switch ($event) {
+            case 'app.store.authorize':
+                try {
+                    $data['merchant_identifier'] = $params['merchant'];
+                    $data['access_token'] = $params['data']['access_token'];
+                    $data['refresh_token'] = $params['data']['refresh_token'];
+                    $expirationDate = \Carbon\Carbon::now()->addDays(13);
+                    $data['token_exp'] = $expirationDate;
+                    $merchant = StoreProductReviewsMerchant::updateOrCreate(['merchant_identifier' => $params['merchant']],$data);
+                    $merchantProfileService = app(\Mega\StoreAndProductReviewsApp\Services\Merchant\MerchantProfile::class);
+                    $merchantProfileService->completeMerchantProfile($merchant);
+//              $job = new \Mega\StoreAndProductReviewsApp\Jobs\Merchants\UpdateMerchantProfileJob($merchant);
+//                dispatch($job);
+                    $resp = [
+                        'status' => true,
+                        'data' => ['event' => 'authorized']
+                    ];
+                }catch (\Exception $e){
+                    $this->logger->info($e->getMessage());
+                }
+                break;
+            case 'app.settings.updated':
+                $merchant = StoreProductReviewsMerchant::where('merchant_identifier',$params['merchant'])->first();
+                $configs = [];
+                foreach ($params['data']['settings'] as $configKey => $settings){
+                    foreach ($settings as $setting){
+                        foreach ($setting as $key => $value){
+                            $configs[] = $merchant->storeProductReviewsConfigurations()->updateOrCreate(
+                                [
+                                    'config_name' => $key
+                                ],[
+                                    'config_value' => $value
+                                ]
+                            );
+                        }
+                    }
+                }
+                $data = [
+                    'event' => $event,
+                    'data' => $configs
+                ];
+                break;
+            case 'app.uninstalled' :
+
+
+        }
+        if(isset($data)){
+            return response()->json($data);
+        }
+        return response()->json($resp);
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "name": "vendor_name/StoreAndProductReviewsApp",
+    "description": "description",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "codeinnovers",
+            "email": "email@example.com"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Mega\\StoreAndProductReviewsApp\\": "src"
+        }
+    },
+    "extra": {
+        "laravel" : {
+            "providers" : [
+                "Mega\\StoreAndProductReviewsApp\\Providers\\StoreAndProductReviewsServiceProvider"
+            ]
+        }
+    }
+}

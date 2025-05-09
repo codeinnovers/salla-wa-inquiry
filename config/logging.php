@@ -135,7 +135,18 @@ return [
             'driver' => 'daily',
             'path' => storage_path('logs/whats-inq/merchant.log'),
             'level' => 'info',
+        ],
+        'product_reviews' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/store-and-product/product-reviews.log'),
+            'level' => 'info',
+        ],
+        'store_product_merchant' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/store-and-product/merchant.log'),
+            'level' => 'info',
         ]
+
 
     ],
 

@@ -60,6 +60,51 @@ Route::prefix('/dashboard')
             '/social-configurations/{socialConfiguration}',
             App\Livewire\Dashboard\SocialConfigurationEdit::class
         )->name('social-configurations.edit');
+
+        Route::get(
+            '/store-and-product-webhooks',
+            App\Livewire\Dashboard\StoreAndProductWebhookIndex::class
+        )->name('store-and-product-webhooks.index');
+
+        Route::get(
+            '/store-and-product-webhooks/create',
+            App\Livewire\Dashboard\StoreAndProductWebhookCreate::class
+        )->name('store-and-product-webhooks.create');
+
+        Route::get(
+            '/store-and-product-webhooks/{storeAndProductWebhook}',
+            App\Livewire\Dashboard\StoreAndProductWebhookEdit::class
+        )->name('store-and-product-webhooks.edit');
+
+        Route::get(
+            '/store-product-reviews-merchants',
+            App\Livewire\Dashboard\StoreProductReviewsMerchantIndex::class
+        )->name('store-product-reviews-merchants.index');
+
+        Route::get(
+            '/store-product-reviews-merchants/create',
+            App\Livewire\Dashboard\StoreProductReviewsMerchantCreate::class
+        )->name('store-product-reviews-merchants.create');
+
+        Route::get(
+            '/store-product-reviews-merchants/{storeProductReviewsMerchant}',
+            App\Livewire\Dashboard\StoreProductReviewsMerchantEdit::class
+        )->name('store-product-reviews-merchants.edit');
+
+        Route::get(
+            '/store-product-reviews-configurations',
+            App\Livewire\Dashboard\StoreProductReviewsConfigurationIndex::class
+        )->name('store-product-reviews-configurations.index');
+
+        Route::get(
+            '/store-product-reviews-configurations/create',
+            App\Livewire\Dashboard\StoreProductReviewsConfigurationCreate::class
+        )->name('store-product-reviews-configurations.create');
+
+        Route::get(
+            '/store-product-reviews-configurations/{storeProductReviewsConfiguration}',
+            App\Livewire\Dashboard\StoreProductReviewsConfigurationEdit::class
+        )->name('store-product-reviews-configurations.edit');
     });
 
 // API

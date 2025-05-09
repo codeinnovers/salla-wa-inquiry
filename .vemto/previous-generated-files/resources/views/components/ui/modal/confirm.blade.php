@@ -1,3 +1,5 @@
+
+
 @props(['id' => null, 'maxWidth' => null])
 
 <x-ui.modal :id="$id" :maxWidth="$maxWidth" {{ $attributes }}>

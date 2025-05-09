@@ -27,7 +27,8 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Mega\\SallaSocialShare\\": "packages/Mega/SallaSocialShare/src"
+            "Mega\\SallaSocialShare\\": "packages/Mega/SallaSocialShare/src",
+            "Mega\\StoreAndProductReviewsApp\\": "packages/Mega/StoreAndProductReviewsApp/src"
         }
     },
     "autoload-dev": {

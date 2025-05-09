@@ -24,5 +24,8 @@ class DatabaseSeeder extends Seeder
         $this->call(WebhookSeeder::class);
         $this->call(MerchantSeeder::class);
         $this->call(SocialConfigurationSeeder::class);
+        $this->call(StoreAndProductWebhookSeeder::class);
+        $this->call(StoreProductReviewsMerchantSeeder::class);
+        $this->call(StoreProductReviewsConfigurationSeeder::class);
     }
 }

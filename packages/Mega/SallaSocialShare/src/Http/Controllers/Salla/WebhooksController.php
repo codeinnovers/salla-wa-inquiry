@@ -79,8 +79,8 @@ class WebhooksController extends Controller
                 ];
                 break;
             case 'app.uninstalled' :
-                $job = new \Mega\SallaStorePickup\Jobs\Application\AppUninstalledJob($webhook);
-                $this->dispatch($job);
+                // $job = new \Mega\SallaStorePickup\Jobs\Application\AppUninstalledJob($webhook);
+                // $this->dispatch($job);
                 $resp = [
                     'status' => true,
                     'data' => ['event' => $event]

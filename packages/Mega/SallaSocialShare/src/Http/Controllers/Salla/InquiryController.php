@@ -70,6 +70,35 @@ class InquiryController extends Controller
         }
         
     }
+    
+    public function getchatValue(Request $request){
+        $storeId = $request->query('store_id');
+        $configData = [];
+        try{
+             $merchant = Merchant::with('socialConfigurations')->where('merchant_identifier',$storeId)->latest()->first();
+             $configurations = $merchant->socialConfigurations;
+             $configValues = $this->getConfigurationValues($configurations);
+             $number = $configValues['mega-whatsapp-inuiry.whatsapp_number'];
+             $chatMsg = $configValues['mega-whatsapp-inuiry.chat_message'];
+             $configData[] = [
+                'whatsapp_number' => $number,
+                'chat_msg' => $chatMsg
+            ];
+             
+            return response()->json([
+                'status' => 'success',
+                'data' => $configData
+            ]);
+            
+        }catch (\Exception $e){
+            $this->logger->info($e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Store not found',
+            ], 404);
+        }
+        
+    }
 
     public function getConfigurationValues($configurations) {
         $configValues = [];

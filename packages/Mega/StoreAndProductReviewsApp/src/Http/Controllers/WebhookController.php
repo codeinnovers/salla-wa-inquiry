@@ -8,6 +8,7 @@ use App\Models\StoreProductReviewsMerchant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Psr\Log\LoggerInterface;
+use function Livewire\Volt\js;
 
 class WebhookController extends Controller
 {
@@ -26,11 +27,10 @@ class WebhookController extends Controller
             $webhook = StoreAndProductWebhook::create([
                 'event' => $params['event'],
                 'merchant' => $params['merchant'],
-                'status'  => 'success',
+//                'status'  => 'success',
                 'payload' => json_encode($params),
                 'reference_number' => $params['data']['id'] ?? $params['data']['id'] ?? "-",
             ]);
-
         }catch (\Exception $e){
             $this->logger->info($e->getMessage());
         }
@@ -65,7 +65,8 @@ class WebhookController extends Controller
                         foreach ($setting as $key => $value){
                             $configs[] = $merchant->storeProductReviewsConfigurations()->updateOrCreate(
                                 [
-                                    'config_name' => $key
+                                    'config_name' => $key,
+                                    'product_merchant_id' => $merchant->id,
                                 ],[
                                     'config_value' => $value
                                 ]

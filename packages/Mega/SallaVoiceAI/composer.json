@@ -1,0 +1,16 @@
+{
+  "name": "mega/salla-voice-ai",
+  "description": "AI Voice Commerce Assistant for Salla",
+  "autoload": {
+    "psr-4": {
+      "Mega\\SallaVoiceAI\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Mega\\SallaVoiceAI\\Providers\\SallaVoiceServiceProvider"
+      ]
+    }
+  }
+}

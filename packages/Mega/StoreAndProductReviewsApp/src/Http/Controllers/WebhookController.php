@@ -26,7 +26,7 @@ class WebhookController extends Controller
             $webhook = StoreAndProductWebhook::create([
                 'event' => $params['event'],
                 'merchant' => $params['merchant'],
-                'status'  => 'success',
+                // 'status'  => 'success',
                 'payload' => json_encode($params),
                 'reference_number' => $params['data']['id'] ?? $params['data']['id'] ?? "-",
             ]);
@@ -60,18 +60,14 @@ class WebhookController extends Controller
             case 'app.settings.updated':
                 $merchant = StoreProductReviewsMerchant::where('merchant_identifier',$params['merchant'])->first();
                 $configs = [];
-                foreach ($params['data']['settings'] as $configKey => $settings){
-                    foreach ($settings as $setting){
-                        foreach ($setting as $key => $value){
-                            $configs[] = $merchant->storeProductReviewsConfigurations()->updateOrCreate(
-                                [
-                                    'config_name' => $key
-                                ],[
-                                    'config_value' => $value
-                                ]
-                            );
-                        }
-                    }
+                foreach ($params['data']['settings'] as $key => $value){
+                      $configs[] = $merchant->storeProductReviewsConfigurations()->updateOrCreate(
+                        [
+                            'config_name' => $key
+                        ],[
+                            'config_value' => $value
+                        ]
+                    );
                 }
                 $data = [
                     'event' => $event,

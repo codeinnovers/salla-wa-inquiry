@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\InstallationController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +18,12 @@ use App\Http\Controllers\Api\AuthController;
 Route::name('api.')
     ->prefix('api')
     ->group(function () {
+        Route::post('/checkout/custom-data', [InstallationController::class, 'store']);
         Route::post('/login', [AuthController::class, 'login'])->name(
             'api.login'
         );
 
         Route::middleware('auth:sanctum')->group(function () {});
     });
+
+

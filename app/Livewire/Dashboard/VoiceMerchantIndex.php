@@ -3,10 +3,10 @@
 namespace App\Livewire\Dashboard;
 
 use Livewire\Component;
-use App\Models\Merchant;
 use Livewire\WithPagination;
+use App\Models\VoiceMerchant;
 
-class MerchantIndex extends Component
+class VoiceMerchantIndex extends Component
 {
     use WithPagination;
 
@@ -17,7 +17,7 @@ class MerchantIndex extends Component
     public $queryString = ['search', 'sortField', 'sortDirection'];
 
     public $confirmingDeletion = false;
-    public $deletingMerchant;
+    public $deletingVoiceMerchant;
 
     public function updatingSearch()
     {
@@ -26,14 +26,14 @@ class MerchantIndex extends Component
 
     public function confirmDeletion(string $id)
     {
-        $this->deletingMerchant = $id;
+        $this->deletingVoiceMerchant = $id;
 
         $this->confirmingDeletion = true;
     }
 
-    public function delete(Merchant $merchant)
+    public function delete(VoiceMerchant $voiceMerchant)
     {
-        $merchant->delete();
+        $voiceMerchant->delete();
 
         $this->confirmingDeletion = false;
     }
@@ -57,23 +57,21 @@ class MerchantIndex extends Component
 
     public function getRowsQueryProperty()
     {
-        $records = Merchant::query()
-            ->with('voiceMerchant')
-            ->orderBy($this->sortField, $this->sortDirection);
-        if($this->search) {
-            $records->where(function ($q) {
-                $q->where('name', 'like', "%{$this->search}%")
-                  ->orWhere('merchant_identifier', 'like', "%{$this->search}%");
+        return VoiceMerchant::query()
+            ->orderBy($this->sortField, $this->sortDirection)
+            ->where(function ($query) {
+                $query->where('name', 'like', "%{$this->search}%")
+                      ->orWhere('merchant_identifier', 'like', "%{$this->search}%")
+                      ->orWhere('email', 'like', "%{$this->search}%")
+                      ->orWhere('store_reference', 'like', "%{$this->search}%")
+                      ->orWhere('plan', 'like', "%{$this->search}%");
             });
-        }
-        return $records;
     }
 
     public function render()
     {
-
-        return view('livewire.dashboard.merchants.index', [
-            'merchants' => $this->rows,
+        return view('livewire.dashboard.voice-merchants.index', [
+            'voiceMerchants' => $this->rows,
         ]);
     }
 }

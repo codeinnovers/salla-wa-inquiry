@@ -4,8 +4,7 @@ namespace Mega\SallaVoiceAI\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Mega\SallaVoiceAI\Models\Product;
-use Mega\SallaVoiceAI\Models\Store;
+use Mega\SallaVoiceAI\Models\VoiceAiMerchant;
 use Mega\SallaVoiceAI\Models\VoiceLog;
 use Mega\SallaVoiceAI\Services\VoiceService;
 
@@ -13,83 +12,98 @@ class VoiceController
 {
     public function search(Request $request)
     {
+        // Validate store_reference first
+        $request->validate([
+            'store_reference' => 'required|string',
+        ]);
+
+        // Find merchant store
+        $store = VoiceAiMerchant::where('store_reference', $request->store_reference)->first();
+
+        if (!$store) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Store reference not found.',
+            ], 404);
+        }
+
+        // 🔒 Enforce Subscription Limits
+        if ($store->hasExceededMonthlyLimit()) {
+            return response()->json([
+                'success' => false,
+                'error_code' => 'LIMIT_EXCEEDED',
+                'message' => 'Monthly voice search limit exceeded. Please upgrade your subscription plan to continue.',
+                'plan' => ucfirst($store->plan ?? 'free'),
+                'usage' => $store->voice_usage_count,
+                'limit' => $store->getMonthlyLimit(),
+            ], 403);
+        }
+
+        // Validate audio file
+        $request->validate([
+            'audio' => 'required|file',
+        ]);
+
         try {
-
-            $request->validate([
-                'audio' => 'required|file',
-            ]);
-
-            $store = Store::findOrFail(1);
-
-            // 🎤 Voice → Text (using ElevenLabs or your STT API)
+            // 🎤 Voice → Text
             $audioPath = $request->file('audio')->getRealPath();
             $text = app(VoiceService::class)->speechToText($audioPath);
 
             if (!$text) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Voice not recognized'
+                    'message' => 'Voice not recognized',
                 ]);
             }
 
-            // 🧹 Clean text (basic normalization)
+            // 📈 Increment Merchant Usage Count
+            $store->incrementVoiceUsage();
+
+            // 🧹 Clean text & extract keywords
             $keywords = $this->extractKeywords($text);
 
-            // 🛍️ Search ONLY by name
-            $products = Product::where('store_id', $store->id)
-                ->where(function ($q) use ($keywords) {
-                    foreach ($keywords as $word) {
-                        $q->orWhere('name', 'LIKE', "%{$word}%");
-                    }
-                })
-                ->limit(20)
-                ->get();
-
-            // 🧾 Log
+            // 🧾 Save Log
             VoiceLog::create([
-                'store_id' => $store->id,
+                'store_id' => $store->store_reference,
                 'query' => $text,
-                'ai_response' => json_encode($keywords),
-                'results_count' => $products->count(),
-                'language' => $this->detectLanguage($text)
+                'ai_response' => $keywords,
             ]);
 
             return response()->json([
                 'success' => true,
                 'spoken_text' => $text,
                 'keywords' => $keywords,
-                'products' => $products
+                'remaining_searches' => $store->getRemainingVoiceSearches(),
             ]);
 
         } catch (\Exception $e) {
-
-            Log::error('Voice Search Error: '.$e->getMessage());
+            Log::error('Voice Search Error: ' . $e->getMessage());
 
             return response()->json([
                 'success' => false,
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
 
-    // 🔤 Extract keywords only
+    // 🔤 Extract keywords using multi-byte character functions
     private function extractKeywords($text)
     {
-        $text = mb_strtolower($text);
+        $text = mb_strtolower($text, 'UTF-8');
 
-        // Remove numbers & symbols
+        // Remove non-letter characters
         $text = preg_replace('/[^\p{L}\s]/u', '', $text);
 
         // Stop words (EN + AR)
         $stopWords = [
-            'the','and','for','with','i','want','need',
-            'ابي','اريد','ابغى','في','من','على'
+            'the', 'and', 'for', 'with', 'i', 'want', 'need',
+            'ابي', 'اريد', 'ابغى', 'في', 'من', 'على'
         ];
 
-        $words = explode(' ', trim($text));
+        $words = preg_split('/\s+/u', trim($text));
 
         return array_values(array_filter($words, function ($word) use ($stopWords) {
-            return !in_array($word, $stopWords) && strlen($word) > 2;
+            return !in_array($word, $stopWords) && mb_strlen($word, 'UTF-8') > 2;
         }));
     }
 

@@ -14,4 +14,7 @@ return [
     'store_and_products' => 'Store And Products Reviews',
     'store_product_webhook' => 'Webhooks',
     'store_product_configuration' => 'Configuration',
+    'ai_voice' => 'AI Voice',
+    'voice_merchants' => 'Voice Merchants',
+    'voice_webhooks' => 'Voice Webhooks',
 ];

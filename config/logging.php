@@ -145,6 +145,16 @@ return [
             'driver' => 'daily',
             'path' => storage_path('logs/store-and-product/merchant.log'),
             'level' => 'info',
+        ],
+        'salla_voice_ai' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/salla-voice-ai/webhook.log'),
+            'level' => 'info',
+        ],
+        'salla_voice_ai_merchant' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/salla-voice-ai/merchant.log'),
+            'level' => 'info',
         ]
 
 

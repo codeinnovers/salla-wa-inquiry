@@ -105,6 +105,46 @@ Route::prefix('/dashboard')
             '/store-product-reviews-configurations/{storeProductReviewsConfiguration}',
             App\Livewire\Dashboard\StoreProductReviewsConfigurationEdit::class
         )->name('store-product-reviews-configurations.edit');
+
+        Route::get(
+            '/voice-merchants',
+            App\Livewire\Dashboard\VoiceMerchantIndex::class
+        )->name('voice-merchants.index');
+
+        Route::get(
+            '/voice-merchants/create',
+            App\Livewire\Dashboard\VoiceMerchantCreate::class
+        )->name('voice-merchants.create');
+
+        Route::get(
+            '/voice-merchants/{voiceMerchant}',
+            App\Livewire\Dashboard\VoiceMerchantEdit::class
+        )->name('voice-merchants.edit');
+
+        Route::get(
+            '/voice-webhooks',
+            App\Livewire\Dashboard\VoiceWebhookIndex::class
+        )->name('voice-webhooks.index');
+
+        Route::get(
+            '/voice-plan-configurations',
+            App\Livewire\Dashboard\VoicePlanConfigurationIndex::class
+        )->name('voice-plan-configurations.index');
+
+        Route::get(
+            '/voice-plan-configurations/create',
+            App\Livewire\Dashboard\VoicePlanConfigurationCreate::class
+        )->name('voice-plan-configurations.create');
+
+        Route::get(
+            '/voice-plan-configurations/{voicePlanConfiguration}',
+            App\Livewire\Dashboard\VoicePlanConfigurationEdit::class
+        )->name('voice-plan-configurations.edit');
+
+        Route::get(
+            '/voice-ai-configuration',
+            App\Livewire\Dashboard\VoiceAiConfigurationEdit::class
+        )->name('voice-ai-configuration.edit');
     });
 
 // API

@@ -177,6 +177,67 @@ new class extends Component
                             </x-slot>
                         </x-dropdown>
                     </div>
+                    <div class="ml-3 relative">
+                        <x-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                <span class="inline-flex rounded-md">
+                                    <button
+                                        type="button"
+                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150"
+                                    >
+                                        {{ __('navigation.ai_voice') ?? 'AI Voice' }}
+
+                                        <svg
+                                            class="ml-2 -mr-0.5 h-4 w-4"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke-width="1.5"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                                            />
+                                        </svg>
+                                    </button>
+                                </span>
+                            </x-slot>
+
+                            <x-slot name="content">
+                                @can('view-any', App\Models\VoiceMerchant::class)
+                                    <x-dropdown-link
+                                        wire:navigate
+                                        href="{{ route('dashboard.voice-merchants.index') }}"
+                                    >
+                                        {{ __('navigation.voice_merchants') }}
+                                    </x-dropdown-link>
+                                @endcan @can('view-any', App\Models\VoicePlanConfiguration::class)
+                                    <x-dropdown-link
+                                        wire:navigate
+                                        href="{{ route('dashboard.voice-plan-configurations.index') }}"
+                                    >
+                                        {{ __('Plan Configurations') }}
+                                    </x-dropdown-link>
+                                @endcan @can('view-any', App\Models\VoiceAiConfiguration::class)
+                                    <x-dropdown-link
+                                        wire:navigate
+                                        href="{{ route('dashboard.voice-ai-configuration.edit') }}"
+                                    >
+                                        {{ __('ElevenLabs & AI Settings') }}
+                                    </x-dropdown-link>
+                                @endcan @can('view-any', App\Models\VoiceWebhook::class)
+                                    <x-dropdown-link
+                                        wire:navigate
+                                        href="{{ route('dashboard.voice-webhooks.index') }}"
+                                    >
+                                        {{ __('navigation.voice_webhooks') }}
+                                    </x-dropdown-link>
+                                @endcan
+                            </x-slot>
+                        </x-dropdown>
+                    </div>
                 </div>
             </div>
 
@@ -188,7 +249,7 @@ new class extends Component
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                         >
                             <div
-                                x-data="{{ json_encode(['name' => auth()->user()->name]) }}"
+                                x-data="{{ json_encode(['name' => auth()->user()?->name ?? 'Guest']) }}"
                                 x-text="name"
                                 x-on:profile-updated.window="name = $event.detail.name"
                             ></div>
@@ -282,6 +343,27 @@ new class extends Component
             >
                 {{ __('navigation.social_configurations') }}
             </x-responsive-nav-link>
+            @endcan @can('view-any', App\Models\VoiceMerchant::class)
+            <x-responsive-nav-link
+                href="{{ route('dashboard.voice-merchants.index') }}"
+                :active="request()->routeIs('dashboard.voice-merchants.index')"
+            >
+                {{ __('navigation.voice_merchants') }}
+            </x-responsive-nav-link>
+            @endcan @can('view-any', App\Models\VoicePlanConfiguration::class)
+            <x-responsive-nav-link
+                href="{{ route('dashboard.voice-plan-configurations.index') }}"
+                :active="request()->routeIs('dashboard.voice-plan-configurations.index')"
+            >
+                {{ __('Plan Configurations') }}
+            </x-responsive-nav-link>
+            @endcan @can('view-any', App\Models\VoiceWebhook::class)
+            <x-responsive-nav-link
+                href="{{ route('dashboard.voice-webhooks.index') }}"
+                :active="request()->routeIs('dashboard.voice-webhooks.index')"
+            >
+                {{ __('navigation.voice_webhooks') }}
+            </x-responsive-nav-link>
             @endcan
         </div>
 
@@ -290,12 +372,12 @@ new class extends Component
             <div class="px-4">
                 <div
                     class="font-medium text-base text-gray-800"
-                    x-data="{{ json_encode(['name' => auth()->user()->name]) }}"
+                    x-data="{{ json_encode(['name' => auth()->user()?->name ?? 'Guest']) }}"
                     x-text="name"
                     x-on:profile-updated.window="name = $event.detail.name"
                 ></div>
                 <div class="font-medium text-sm text-gray-500">
-                    {{ auth()->user()->email }}
+                    {{ auth()->user()?->email }}
                 </div>
             </div>
 

@@ -85,6 +85,8 @@
 {{--                    }}</x-ui.table.header--}}
 {{--                >--}}
 
+                <x-ui.table.header for-crud>Subscription Plan</x-ui.table.header>
+                <x-ui.table.header for-crud>Searches Used / Limit</x-ui.table.header>
                 <x-ui.table.header for-crud wire:click="sortBy('token_exp')"
                     >{{ __('crud.merchants.inputs.token_exp.label')
                     }}</x-ui.table.header
@@ -110,12 +112,36 @@
                     <x-ui.table.column for-crud
                         >{{ $merchant->store_reference }}</x-ui.table.column
                     >
-{{--                    <x-ui.table.column for-crud--}}
-{{--                        >{{ $merchant->access_token }}</x-ui.table.column--}}
-{{--                    >--}}
-{{--                    <x-ui.table.column for-crud--}}
-{{--                        >{{ $merchant->refresh_token }}</x-ui.table.column--}}
-{{--                    >--}}
+                    <x-ui.table.column for-crud>
+                        @php
+                            $voiceMerchant = $merchant->voiceMerchant;
+                            $planName = strtolower($voiceMerchant->plan ?? 'free');
+                            $badgeColors = [
+                                'free' => 'bg-gray-100 text-gray-800 border-gray-300',
+                                'basic' => 'bg-blue-100 text-blue-800 border-blue-300',
+                                'pro' => 'bg-purple-100 text-purple-800 border-purple-300',
+                            ];
+                            $color = $badgeColors[$planName] ?? 'bg-indigo-100 text-indigo-800 border-indigo-300';
+                        @endphp
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border {{ $color }}">
+                            {{ ucfirst($planName) }}
+                        </span>
+                    </x-ui.table.column>
+                    <x-ui.table.column for-crud>
+                        @php
+                            $used = $voiceMerchant->voice_usage_count ?? 0;
+                            $limit = $voiceMerchant ? $voiceMerchant->getMonthlyLimit() : 100;
+                            $remaining = max(0, $limit - $used);
+                        @endphp
+                        <div class="space-y-1">
+                            <div class="text-xs font-semibold text-gray-800">
+                                🔍 <span class="text-indigo-600 font-bold">{{ number_format($used) }}</span> / {{ number_format($limit) }} used
+                            </div>
+                            <div class="text-xs text-emerald-600 font-medium">
+                                ({{ number_format($remaining) }} searches left)
+                            </div>
+                        </div>
+                    </x-ui.table.column>
                     <x-ui.table.column for-crud
                         >{{ $merchant->token_exp }}</x-ui.table.column
                     >

@@ -9,10 +9,19 @@ class VoiceService
 {
     public function speechToText($filePath)
     {
-        $apiKey = 'sk_85e83f662c270acf31a467c2ab3eaa236f761e75ee030024';
+        $apiKey = '';
+        if (class_exists(\App\Models\VoiceAiConfiguration::class)) {
+            $apiKey = \App\Models\VoiceAiConfiguration::getElevenLabsApiKey();
+        } elseif (class_exists(\Mega\SallaVoiceAI\Models\VoiceAiConfiguration::class)) {
+            $apiKey = \Mega\SallaVoiceAI\Models\VoiceAiConfiguration::getElevenLabsApiKey();
+        }
+
+        if (empty($apiKey)) {
+            $apiKey = config('salla-ai.elevenlabs_api_key') ?? env('ELEVENLABS_API_KEY');
+        }
 
         if (!$apiKey) {
-            throw new \Exception("ElevenLabs API key missing");
+            throw new \Exception("ElevenLabs API key missing in server configuration.");
         }
 
        $response = Http::withHeaders([

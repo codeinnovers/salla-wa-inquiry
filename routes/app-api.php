@@ -19,9 +19,7 @@ Route::name('api.')
     ->prefix('api')
     ->group(function () {
         Route::post('/checkout/custom-data', [InstallationController::class, 'store']);
-        Route::post('/login', [AuthController::class, 'login'])->name(
-            'api.login'
-        );
+        // Route::post('/login', [AuthController::class, 'login'])->name('api.login');
 
         Route::middleware('auth:sanctum')->group(function () {});
     });

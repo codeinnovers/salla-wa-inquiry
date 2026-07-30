@@ -20,4 +20,9 @@ class Merchant extends Model
     {
         return $this->hasMany(SocialConfiguration::class);
     }
+
+    public function voiceMerchant()
+    {
+        return $this->hasOne(VoiceMerchant::class, 'merchant_identifier', 'merchant_identifier');
+    }
 }

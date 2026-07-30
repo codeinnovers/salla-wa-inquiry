@@ -3,10 +3,10 @@
 namespace App\Livewire\Dashboard;
 
 use Livewire\Component;
-use App\Models\Merchant;
 use Livewire\WithPagination;
+use App\Models\VoiceWebhook;
 
-class MerchantIndex extends Component
+class VoiceWebhookIndex extends Component
 {
     use WithPagination;
 
@@ -17,7 +17,7 @@ class MerchantIndex extends Component
     public $queryString = ['search', 'sortField', 'sortDirection'];
 
     public $confirmingDeletion = false;
-    public $deletingMerchant;
+    public $deletingVoiceWebhook;
 
     public function updatingSearch()
     {
@@ -26,14 +26,14 @@ class MerchantIndex extends Component
 
     public function confirmDeletion(string $id)
     {
-        $this->deletingMerchant = $id;
+        $this->deletingVoiceWebhook = $id;
 
         $this->confirmingDeletion = true;
     }
 
-    public function delete(Merchant $merchant)
+    public function delete(VoiceWebhook $voiceWebhook)
     {
-        $merchant->delete();
+        $voiceWebhook->delete();
 
         $this->confirmingDeletion = false;
     }
@@ -57,23 +57,18 @@ class MerchantIndex extends Component
 
     public function getRowsQueryProperty()
     {
-        $records = Merchant::query()
-            ->with('voiceMerchant')
-            ->orderBy($this->sortField, $this->sortDirection);
-        if($this->search) {
-            $records->where(function ($q) {
-                $q->where('name', 'like', "%{$this->search}%")
-                  ->orWhere('merchant_identifier', 'like', "%{$this->search}%");
+        return VoiceWebhook::query()
+            ->orderBy($this->sortField, $this->sortDirection)
+            ->where(function ($query) {
+                $query->where('event', 'like', "%{$this->search}%")
+                      ->orWhere('merchant', 'like', "%{$this->search}%");
             });
-        }
-        return $records;
     }
 
     public function render()
     {
-
-        return view('livewire.dashboard.merchants.index', [
-            'merchants' => $this->rows,
+        return view('livewire.dashboard.voice-webhooks.index', [
+            'voiceWebhooks' => $this->rows,
         ]);
     }
 }

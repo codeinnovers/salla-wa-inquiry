@@ -19,7 +19,7 @@ Route::view('profile', 'profile')
 require __DIR__.'/auth.php';
 
 MagicLink::route();
-Route::get('magic-link',[\App\Http\Controllers\Users\LoginController::class,'sendLoginLink'])->name('customer.magic-link');
+// Route::get('magic-link',[\App\Http\Controllers\Users\LoginController::class,'sendLoginLink'])->name('customer.magic-link');
 
 Route::get('redirect', [\App\Http\Controllers\InstallationController::class, 'redirect']);
 Route::get('callback', [\App\Http\Controllers\InstallationController::class, 'callback']);

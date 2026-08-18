@@ -14,11 +14,11 @@ class VoiceController
     {
         // Validate store_reference first
         $request->validate([
-            'store_reference' => 'required|string',
+            'store_id' => 'required|string',
         ]);
 
         // Find merchant store
-        $store = VoiceAiMerchant::where('store_reference', $request->store_reference)->first();
+        $store = VoiceAiMerchant::where('merchant_identifier', $request->store_id)->first();
 
         if (!$store) {
             return response()->json([
@@ -63,11 +63,11 @@ class VoiceController
             $keywords = $this->extractKeywords($text);
 
             // 🧾 Save Log
-            VoiceLog::create([
-                'store_id' => $store->store_reference,
-                'query' => $text,
-                'ai_response' => $keywords,
-            ]);
+            // VoiceLog::create([
+            //     'store_id' => $store->merchant_identifier,
+            //     'query' => $text,
+            //     'ai_response' => $keywords,
+            // ]);
 
             return response()->json([
                 'success' => true,

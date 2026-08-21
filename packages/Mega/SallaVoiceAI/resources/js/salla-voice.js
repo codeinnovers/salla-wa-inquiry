@@ -1,9 +1,9 @@
 (function () {
-    console.log("%c[VoiceSearch] Initialized Voice Search in my server", "color: #10b981; font-weight: bold;");
-
-    // 1. Inject CSS
-    const style = document.createElement('style');
-    style.textContent = `
+    // 1. Inject CSS if not already added
+    if (!document.getElementById('salla-voice-style')) {
+        const style = document.createElement('style');
+        style.id = 'salla-voice-style';
+        style.textContent = `
         .s-search-input-wrapper,
         .s-search-icon,
         salla-search {
@@ -122,8 +122,9 @@
         #voiceCancelBtn:hover {
             color: #ef4444 !important;
         }
-    `;
-    document.head.appendChild(style);
+        `;
+        document.head.appendChild(style);
+    }
 
     // Initialize Voice Search
     function initVoiceSearch() {
@@ -242,15 +243,15 @@
                     }
                 });
 
-                // Pick the best supported MIME type for the browser
                 let mimeType = 'audio/webm';
-                if (MediaRecorder.isTypeSupported('audio/webm;codecs=opus')) {
-                    mimeType = 'audio/webm;codecs=opus';
-                } else if (MediaRecorder.isTypeSupported('audio/mp4')) {
-                    mimeType = 'audio/mp4'; // Safari iOS
+                if (window.MediaRecorder) {
+                    if (MediaRecorder.isTypeSupported('audio/webm;codecs=opus')) {
+                        mimeType = 'audio/webm;codecs=opus';
+                    } else if (MediaRecorder.isTypeSupported('audio/mp4')) {
+                        mimeType = 'audio/mp4';
+                    }
                 }
 
-                console.log("[VoiceSearch] Using MIME Type:", mimeType);
                 mediaRecorder = new MediaRecorder(stream, { mimeType });
 
                 mediaRecorder.ondataavailable = (event) => {
@@ -262,11 +263,6 @@
                 mediaRecorder.onstop = async () => {
                     const audioBlob = new Blob(audioChunks, { type: mimeType });
                     const fileExt = mimeType.includes('mp4') ? 'mp4' : 'webm';
-                    console.log("[VoiceSearch] Final Audio Blob created:", {
-                        size: audioBlob.size + " bytes",
-                        type: audioBlob.type,
-                        ext: fileExt
-                    });
 
                     if (stream) {
                         stream.getTracks().forEach(t => t.stop());
@@ -275,18 +271,16 @@
                     await sendAudio(audioBlob, `voice.${fileExt}`);
                 };
 
-                mediaRecorder.start(250); // Collect chunk every 250ms
+                mediaRecorder.start(250);
 
-                // Auto stop after 4.5s
                 clearTimeout(autoStopTimer);
                 autoStopTimer = setTimeout(() => {
                     if (isRecording) stopRecording();
                 }, 4500);
 
             } catch (e) {
-                console.error("[VoiceSearch] Mic access failed:", e);
-                closeListeningBar();
-                alert('تم رفض الوصول إلى الميكروفون');
+                voiceStatusText.innerText = 'تم رفض الوصول إلى الميكروفون';
+                setTimeout(() => closeListeningBar(), 2000);
             }
         }
 
@@ -318,7 +312,7 @@
             if (sallaSearch && typeof sallaSearch.search === 'function') {
                 sallaSearch.search(spokenQuery);
             } else {
-                const nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+                const nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')?.set;
                 if (nativeSetter) {
                     nativeSetter.call(input, spokenQuery);
                 }
@@ -351,8 +345,6 @@
                 });
 
                 const data = await res.json();
-                console.log("[VoiceSearch] Backend response:", data);
-
                 const productList = data.data || data.products || [];
                 const spokenText = data.spoken_text || (productList.length > 0 ? productList[0].name : '');
 
@@ -366,7 +358,6 @@
                     setTimeout(() => closeListeningBar(), 1500);
                 }
             } catch (e) {
-                console.error("[VoiceSearch] Send error:", e);
                 voiceStatusText.innerText = 'حدث خطأ أثناء البحث';
                 setTimeout(() => closeListeningBar(), 1500);
             }

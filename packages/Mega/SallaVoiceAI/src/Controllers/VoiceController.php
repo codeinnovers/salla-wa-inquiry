@@ -111,4 +111,31 @@ class VoiceController
     {
         return preg_match('/[\x{0600}-\x{06FF}]/u', $text) ? 'ar' : 'en';
     }
+
+    /**
+     * Serve custom Voice AI JavaScript snippet for Salla store fronts.
+     */
+    public function serveScript()
+    {
+        $filePath = __DIR__ . '/../../resources/js/salla-voice.js';
+
+        if (!file_exists($filePath)) {
+            $filePath = __DIR__ . '/../resources/js/salla-voice.js';
+        }
+
+        if (!file_exists($filePath)) {
+            return response('console.error("Salla Voice AI: Custom JS file not found on server.");', 404, [
+                'Content-Type' => 'application/javascript',
+                'Access-Control-Allow-Origin' => '*',
+            ]);
+        }
+
+        $jsContent = file_get_contents($filePath);
+
+        return response($jsContent, 200, [
+            'Content-Type' => 'application/javascript; charset=utf-8',
+            'Access-Control-Allow-Origin' => '*',
+            'Cache-Control' => 'no-cache, private',
+        ]);
+    }
 }

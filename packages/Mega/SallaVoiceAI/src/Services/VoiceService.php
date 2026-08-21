@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 class VoiceService
 {
-    
+
      public function speechToText($filePath)
     {
         //$apiKey = 'sk_85e83f662c270acf31a467c2ab3eaa236f761e75ee030024';
@@ -45,8 +45,8 @@ class VoiceService
 
         return '';
     }
-    
-    
+
+
     public function speechToText_bck($filePath)
     {
         $apiKey = '';
@@ -64,7 +64,6 @@ class VoiceService
             throw new \Exception("ElevenLabs API key missing in server configuration.");
         }
 
- $apiKey = 'sk_85e83f662c270acf31a467c2ab3eaa236f761e75ee030024';
        $response = Http::withHeaders([
     'xi-api-key' => '$apiKey',
 ])->attach(

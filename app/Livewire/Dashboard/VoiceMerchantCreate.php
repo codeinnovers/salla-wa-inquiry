@@ -46,6 +46,8 @@ class VoiceMerchantCreate extends Component
             'monthly_voice_limit' => 'required|integer|min:0',
         ]);
 
+        $days = VoicePlanConfiguration::getDaysForSlug($this->plan);
+
         $voiceMerchant = VoiceMerchant::create([
             'merchant_identifier' => $this->merchant_identifier ?: null,
             'name' => $this->name ?: null,
@@ -55,7 +57,7 @@ class VoiceMerchantCreate extends Component
             'plan' => strtolower($this->plan),
             'monthly_voice_limit' => $this->monthly_voice_limit,
             'voice_usage_count' => 0,
-            'usage_reset_at' => Carbon::now()->addMonth(),
+            'usage_reset_at' => Carbon::now()->addDays($days),
         ]);
 
         session()->flash('message', 'Voice Merchant created and plan assigned successfully!');

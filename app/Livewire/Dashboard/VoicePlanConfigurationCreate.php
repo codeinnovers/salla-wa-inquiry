@@ -11,6 +11,7 @@ class VoicePlanConfigurationCreate extends Component
     public string $name = '';
     public string $slug = '';
     public int $monthly_search_limit = 1000;
+    public int $days = 30;
     public float $price = 0.00;
     public string $currency = 'SAR';
     public string $description = '';
@@ -25,6 +26,24 @@ class VoicePlanConfigurationCreate extends Component
     {
         if (empty($this->slug)) {
             $this->slug = Str::slug($value);
+            $this->applyDefaultDaysForSlug($this->slug);
+        }
+    }
+
+    public function updatedSlug($value)
+    {
+        $this->applyDefaultDaysForSlug($value);
+    }
+
+    protected function applyDefaultDaysForSlug(string $slug)
+    {
+        $clean = strtolower(trim($slug));
+        if ($clean === 'free') {
+            $this->days = 3;
+        } elseif ($clean === 'basic') {
+            $this->days = 30;
+        } elseif ($clean === 'pro') {
+            $this->days = 360;
         }
     }
 
@@ -36,6 +55,7 @@ class VoicePlanConfigurationCreate extends Component
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:voice_plan_configurations,slug',
             'monthly_search_limit' => 'required|integer|min:0',
+            'days' => 'required|integer|min:1',
             'price' => 'required|numeric|min:0',
             'currency' => 'required|string|max:10',
             'description' => 'nullable|string',
@@ -46,6 +66,7 @@ class VoicePlanConfigurationCreate extends Component
             'name' => $this->name,
             'slug' => strtolower($this->slug),
             'monthly_search_limit' => $this->monthly_search_limit,
+            'days' => $this->days,
             'price' => $this->price,
             'currency' => strtoupper($this->currency),
             'description' => $this->description,

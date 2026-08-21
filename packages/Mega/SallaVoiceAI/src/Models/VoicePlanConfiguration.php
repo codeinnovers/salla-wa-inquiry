@@ -15,6 +15,7 @@ class VoicePlanConfiguration extends Model
         'name',
         'slug',
         'monthly_search_limit',
+        'days',
         'price',
         'currency',
         'description',
@@ -23,6 +24,7 @@ class VoicePlanConfiguration extends Model
 
     protected $casts = [
         'monthly_search_limit' => 'integer',
+        'days' => 'integer',
         'price' => 'float',
         'is_active' => 'boolean',
     ];
@@ -38,6 +40,21 @@ class VoicePlanConfiguration extends Model
             'basic' => 2000,
             'pro' => 10000,
             default => 100,
+        };
+    }
+
+    public static function getDaysForSlug(string $slug): int
+    {
+        $plan = static::where('slug', strtolower($slug))->where('is_active', true)->first();
+        if ($plan && isset($plan->days)) {
+            return (int) $plan->days;
+        }
+
+        return match (strtolower($slug)) {
+            'free' => 3,
+            'basic' => 30,
+            'pro' => 360,
+            default => 30,
         };
     }
 }

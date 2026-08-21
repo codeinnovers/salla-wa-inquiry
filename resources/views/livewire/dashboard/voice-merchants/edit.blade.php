@@ -83,7 +83,7 @@
 
                     @if ($voiceMerchant->usage_reset_at)
                         <p class="text-xs text-gray-500">
-                            <strong>Billing Reset Date:</strong> {{ $voiceMerchant->usage_reset_at->format('M d, Y H:i:s') }} (Resets automatically every month).
+                            <strong>Billing Reset Date:</strong> {{ $voiceMerchant->usage_reset_at->format('M d, Y H:i:s') }} (Resets automatically based on plan duration).
                         </p>
                     @endif
                 </div>

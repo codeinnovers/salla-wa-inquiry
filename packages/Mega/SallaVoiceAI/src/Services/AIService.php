@@ -7,7 +7,7 @@ class AIService
 {
     public function parse($text)
     {
-        $res = Http::withToken('')
+        $res = Http::withToken(config('salla-ai.openai_key', env('OPENAI_API_KEY')))
             ->post('https://api.openai.com/v1/chat/completions', [
                 'model' => 'gpt-4o-mini',
                 'messages' => [

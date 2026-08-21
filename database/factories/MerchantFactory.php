@@ -32,7 +32,7 @@ class MerchantFactory extends Factory
             'store_reference' => fake()->word(),
             'access_token' => fake()->word(),
             'refresh_token' => fake()->word(),
-            'token_exp' => fake()->word(),
+            'token_exp' => fake()->dateTime(),
         ];
     }
 }

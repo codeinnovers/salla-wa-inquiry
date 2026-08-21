@@ -44,11 +44,13 @@ class VoiceMerchantEdit extends Component
             'voice_usage_count' => 'required|integer|min:0',
         ]);
 
+        $days = VoicePlanConfiguration::getDaysForSlug($this->plan);
+
         $this->voiceMerchant->update([
             'plan' => strtolower($this->plan),
             'monthly_voice_limit' => $this->monthly_voice_limit,
             'voice_usage_count' => $this->voice_usage_count,
-            'usage_reset_at' => $this->voiceMerchant->usage_reset_at ?? Carbon::now()->addMonth(),
+            'usage_reset_at' => $this->voiceMerchant->usage_reset_at ?? Carbon::now()->addDays($days),
         ]);
 
         session()->flash('message', 'Merchant subscription plan updated successfully!');
@@ -58,10 +60,11 @@ class VoiceMerchantEdit extends Component
 
     public function resetUsage()
     {
+        $days = VoicePlanConfiguration::getDaysForSlug($this->plan);
         $this->voice_usage_count = 0;
         $this->voiceMerchant->update([
             'voice_usage_count' => 0,
-            'usage_reset_at' => Carbon::now()->addMonth(),
+            'usage_reset_at' => Carbon::now()->addDays($days),
         ]);
 
         session()->flash('message', 'Merchant voice search usage reset to 0!');

@@ -115,8 +115,7 @@
             </x-slot>
 
             <x-slot name="body">
-                @forelse ($detailStoreProductReviewsConfigurations as
-                $storeProductReviewsConfiguration)
+                @forelse ($detailStoreProductReviewsConfigurations as $storeProductReviewsConfiguration)
                 <x-ui.table.row wire:loading.class.delay="opacity-75">
                     <x-ui.table.column for-detailCrud
                         >{{ $storeProductReviewsConfiguration->config_name

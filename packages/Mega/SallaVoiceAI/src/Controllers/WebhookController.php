@@ -41,6 +41,13 @@ class WebhookController extends Controller
         $event = $params['event'] ?? null;
         $resp = [];
         switch ($event) {
+            case 'app.installed':
+                $resp = [
+                    'status' => true,
+                    'data' => ['event' => 'installed']
+                ];
+                break;
+
             case 'app.store.authorize':
                 try {
                     $data['merchant_identifier'] = $params['merchant'] ?? null;
@@ -76,7 +83,11 @@ class WebhookController extends Controller
                         ? VoicePlanConfiguration::getLimitForSlug('free')
                         : 100;
 
-                    $resetAt = $endDate ? Carbon::parse($endDate) : Carbon::now()->addDays(7);
+                    $freeDays = class_exists(VoicePlanConfiguration::class)
+                        ? VoicePlanConfiguration::getDaysForSlug('free')
+                        : 3;
+
+                    $resetAt = $endDate ? Carbon::parse($endDate) : Carbon::now()->addDays($freeDays);
 
                     if ($merchantId) {
                         $merchant = VoiceMerchant::where('merchant_identifier', (string)$merchantId)->first();
@@ -129,26 +140,41 @@ class WebhookController extends Controller
                     $startDate = $subData['start_date'] ?? null;
                     $endDate = $subData['end_date'] ?? null;
 
-                    // Standardize plan slug (e.g., "Basic Plan" -> "basic")
-                    $slugCandidate = Str::slug($rawPlanName);
-                    $cleanSlug = strtolower(trim(str_replace(['-plan', 'plan-'], '', $slugCandidate)));
+                    // Customization for plan_name mapping:
+                    // "Basic Plan" / monthly -> basic plan (30 days)
+                    // "Annual Plan" / annual / pro -> pro plan (360 days / 1 year)
+                    $normalizedPlanName = strtolower(trim($rawPlanName));
+                    if (str_contains($normalizedPlanName, 'annual') || str_contains($normalizedPlanName, 'yearly') || str_contains($normalizedPlanName, 'pro')) {
+                        $targetSlug = 'pro';
+                    } elseif (str_contains($normalizedPlanName, 'basic') || str_contains($normalizedPlanName, 'monthly')) {
+                        $targetSlug = 'basic';
+                    } elseif (str_contains($normalizedPlanName, 'free') || str_contains($normalizedPlanName, 'trial')) {
+                        $targetSlug = 'free';
+                    } else {
+                        $slugCandidate = Str::slug($rawPlanName);
+                        $targetSlug = strtolower(trim(str_replace(['-plan', 'plan-'], '', $slugCandidate))) ?: 'free';
+                    }
 
                     $planConfig = null;
                     if (class_exists(VoicePlanConfiguration::class)) {
                         $planConfig = VoicePlanConfiguration::where('is_active', true)
-                            ->where(function ($q) use ($rawPlanName, $slugCandidate, $cleanSlug) {
-                                $q->where('slug', $cleanSlug)
-                                  ->orWhere('slug', $slugCandidate)
-                                  ->orWhere('name', 'LIKE', "%{$rawPlanName}%");
+                            ->where(function ($q) use ($targetSlug, $rawPlanName) {
+                                $q->where('slug', $targetSlug)
+                                  ->orWhere('name', 'LIKE', "%{$rawPlanName}%")
+                                  ->orWhere('name', 'LIKE', "%{$targetSlug}%");
                             })->first();
                     }
 
-                    $planKey = $planConfig ? $planConfig->slug : ($cleanSlug ?: 'free');
+                    $planKey = $planConfig ? $planConfig->slug : $targetSlug;
                     $monthlyLimit = $planConfig
                         ? $planConfig->monthly_search_limit
                         : (class_exists(VoicePlanConfiguration::class) ? VoicePlanConfiguration::getLimitForSlug($planKey) : 100);
 
-                    $resetAt = $endDate ? Carbon::parse($endDate) : Carbon::now()->addMonth();
+                    $planDays = $planConfig
+                        ? ($planConfig->days ?? 30)
+                        : (class_exists(VoicePlanConfiguration::class) ? VoicePlanConfiguration::getDaysForSlug($planKey) : 30);
+
+                    $resetAt = $endDate ? Carbon::parse($endDate) : Carbon::now()->addDays($planDays);
 
                     if ($merchantId) {
                         $merchant = VoiceMerchant::where('merchant_identifier', (string)$merchantId)->first();

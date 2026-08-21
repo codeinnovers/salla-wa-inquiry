@@ -15,14 +15,17 @@ return [
         'free' => [
             'name' => 'Free',
             'limit' => 100,
+            'days' => 3,
         ],
         'basic' => [
             'name' => 'Basic',
             'limit' => 2000,
+            'days' => 30,
         ],
         'pro' => [
             'name' => 'Pro',
             'limit' => 10000,
+            'days' => 360,
         ],
     ],
 ];

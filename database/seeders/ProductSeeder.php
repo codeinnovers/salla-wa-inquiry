@@ -3,13 +3,19 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Mega\SallaVoiceAI\Models\Store;
 use Mega\SallaVoiceAI\Models\Product;
 
 class ProductSeeder extends Seeder
 {
     public function run()
     {
-        $storeId = 1;
+        $store = Store::firstOrCreate(['id' => 1], [
+            'salla_store_id' => '1',
+            'store_name' => 'Demo Store',
+            'access_token' => 'demo_token',
+        ]);
+        $storeId = $store->id;
 
         $products = [
             [

@@ -57,7 +57,8 @@
             <x-slot name="head">
                 <x-ui.table.header for-crud wire:click="sortBy('name')">Plan Name</x-ui.table.header>
                 <x-ui.table.header for-crud wire:click="sortBy('slug')">Key / Slug</x-ui.table.header>
-                <x-ui.table.header for-crud wire:click="sortBy('monthly_search_limit')">Monthly Search Limit</x-ui.table.header>
+                <x-ui.table.header for-crud wire:click="sortBy('monthly_search_limit')">Search Limit</x-ui.table.header>
+                <x-ui.table.header for-crud wire:click="sortBy('days')">Duration (Days)</x-ui.table.header>
                 <x-ui.table.header for-crud wire:click="sortBy('price')">Cost / Price</x-ui.table.header>
                 <x-ui.table.header for-crud wire:click="sortBy('is_active')">Status</x-ui.table.header>
                 <x-ui.table.header for-crud>Description</x-ui.table.header>
@@ -75,7 +76,12 @@
                     </x-ui.table.column>
                     <x-ui.table.column for-crud>
                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
-                            🔍 {{ number_format($config->monthly_search_limit) }} searches / mo
+                            🔍 {{ number_format($config->monthly_search_limit) }} searches
+                        </span>
+                    </x-ui.table.column>
+                    <x-ui.table.column for-crud>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-200">
+                            📅 {{ $config->days ?? 30 }} days
                         </span>
                     </x-ui.table.column>
                     <x-ui.table.column for-crud>
@@ -113,7 +119,7 @@
                 </x-ui.table.row>
                 @empty
                 <x-ui.table.row>
-                    <x-ui.table.column colspan="7">No Plan Configurations found.</x-ui.table.column>
+                    <x-ui.table.column colspan="8">No Plan Configurations found.</x-ui.table.column>
                 </x-ui.table.row>
                 @endforelse
             </x-slot>

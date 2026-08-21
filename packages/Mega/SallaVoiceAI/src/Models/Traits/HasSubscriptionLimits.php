@@ -16,6 +16,15 @@ trait HasSubscriptionLimits
     ];
 
     /**
+     * Plan duration mapping (in days)
+     */
+    public static array $planDays = [
+        'free' => 3,
+        'basic' => 30,
+        'pro' => 360,
+    ];
+
+    /**
      * Get the search limit for a specific plan.
      */
     public static function getLimitForPlan(string $plan): int
@@ -44,6 +53,34 @@ trait HasSubscriptionLimits
     }
 
     /**
+     * Get the duration in days for a specific plan.
+     */
+    public static function getDaysForPlan(string $plan): int
+    {
+        $plan = strtolower($plan);
+
+        if (class_exists(\App\Models\VoicePlanConfiguration::class)) {
+            $config = \App\Models\VoicePlanConfiguration::where('slug', $plan)->where('is_active', true)->first();
+            if ($config && isset($config->days)) {
+                return (int) $config->days;
+            }
+        } elseif (class_exists(\Mega\SallaVoiceAI\Models\VoicePlanConfiguration::class)) {
+            $config = \Mega\SallaVoiceAI\Models\VoicePlanConfiguration::where('slug', $plan)->where('is_active', true)->first();
+            if ($config && isset($config->days)) {
+                return (int) $config->days;
+            }
+        }
+
+        $plansConfig = config('salla-ai.plans');
+
+        if (isset($plansConfig[$plan]['days'])) {
+            return (int) $plansConfig[$plan]['days'];
+        }
+
+        return static::$planDays[$plan] ?? 30;
+    }
+
+    /**
      * Get merchant's monthly voice limit.
      */
     public function getMonthlyLimit(): int
@@ -58,12 +95,13 @@ trait HasSubscriptionLimits
     {
         $planName = strtolower($planName);
         $limit = static::getLimitForPlan($planName);
+        $days = static::getDaysForPlan($planName);
 
         $this->plan = $planName;
         $this->monthly_voice_limit = $limit;
 
         if (!$this->usage_reset_at) {
-            $this->usage_reset_at = Carbon::now()->addMonth();
+            $this->usage_reset_at = Carbon::now()->addDays($days);
         }
 
         $this->save();
@@ -79,8 +117,9 @@ trait HasSubscriptionLimits
         $now = Carbon::now();
 
         if (!$this->usage_reset_at || $now->greaterThanOrEqualTo($this->usage_reset_at)) {
+            $days = static::getDaysForPlan($this->plan ?? 'free');
             $this->voice_usage_count = 0;
-            $this->usage_reset_at = $now->copy()->addMonth();
+            $this->usage_reset_at = $now->copy()->addDays($days);
             $this->save();
         }
 

@@ -44,7 +44,7 @@
 
                 <!-- Monthly Search Limit -->
                 <div class="w-full">
-                    <x-ui.label for="monthly_search_limit" class="font-bold text-gray-700">Monthly Search Limit</x-ui.label>
+                    <x-ui.label for="monthly_search_limit" class="font-bold text-gray-700">Search Limit</x-ui.label>
                     <x-ui.input.number
                         class="w-full mt-1"
                         wire:model="monthly_search_limit"
@@ -52,7 +52,21 @@
                         id="monthly_search_limit"
                     />
                     <x-ui.input.error for="monthly_search_limit" />
-                    <p class="text-xs text-gray-500 mt-1">Maximum search requests allowed per merchant per month on this plan.</p>
+                    <p class="text-xs text-gray-500 mt-1">Maximum search requests allowed per merchant per subscription cycle on this plan.</p>
+                </div>
+
+                <!-- Plan Duration in Days -->
+                <div class="w-full">
+                    <x-ui.label for="days" class="font-bold text-gray-700">Plan Duration (Days)</x-ui.label>
+                    <x-ui.input.number
+                        class="w-full mt-1"
+                        wire:model="days"
+                        name="days"
+                        id="days"
+                        placeholder="e.g. 3, 30, 360"
+                    />
+                    <x-ui.input.error for="days" />
+                    <p class="text-xs text-gray-500 mt-1">Duration of the subscription cycle in days (Free = 3 days, Basic = 30 days, Pro = 360 days / 1 year).</p>
                 </div>
 
                 <!-- Price / Cost -->

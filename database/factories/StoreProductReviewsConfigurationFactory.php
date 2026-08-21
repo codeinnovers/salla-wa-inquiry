@@ -25,7 +25,7 @@ class StoreProductReviewsConfigurationFactory extends Factory
         return [
             'config_name' => fake()->text(),
             'config_value' => fake()->text(),
-            'store_product_reviews_merchant_id' => \App\Models\StoreProductReviewsMerchant::factory(),
+            'product_merchant_id' => \App\Models\StoreProductReviewsMerchant::factory(),
         ];
     }
 }

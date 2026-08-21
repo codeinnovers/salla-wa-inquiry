@@ -14,14 +14,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()
-            ->count(1)
-            ->create([
-                'email' => 'admin@admin.com',
-                'password' => \Hash::make('admin'),
-            ]);
+        if (User::where('email', 'admin@admin.com')->doesntExist()) {
+            User::factory()
+                ->count(1)
+                ->create([
+                    'email' => 'admin@admin.com',
+                    'password' => \Hash::make('admin'),
+                ]);
+        }
 
-        $this->call(WebhookSeeder::class);
-       $this->call(MerchantSeeder::class);
+        $this->call([
+            WebhookSeeder::class,
+            MerchantSeeder::class,
+            ProductSeeder::class,
+            SocialConfigurationSeeder::class,
+            StoreAndProductWebhookSeeder::class,
+            StoreProductReviewsMerchantSeeder::class,
+            StoreProductReviewsConfigurationSeeder::class,
+        ]);
     }
 }
